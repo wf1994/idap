@@ -24,6 +24,8 @@
 /dist/
 /nbdist/
 /.nb-gradle/
-.idea/src/main/resources/application.yml
-.idea/mvnw
+/src/main/resources/
+.idea/application.yml
+mvnw
+mvnw.cmd
 .idea/mvnw.cmd

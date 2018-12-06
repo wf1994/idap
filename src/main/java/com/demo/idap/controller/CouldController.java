@@ -38,16 +38,6 @@ public class CouldController {
                 List<Cloudsort> cloudsorts = getCloudDataService.getCloudSort(1);
                 return cloudsorts;
                 //keymap集合取数
-//                Map<String,String> map = (Map<String, String>) getCloudDataService.getCloudSort((long) 10);
-//                Set<Map.Entry<String,String>> entrySet = map.entrySet();
-//                Iterator<Map.Entry<String,String>> it = entrySet.iterator();
-//                while(it.hasNext())
-//                {
-//                        Map.Entry<String,String> me = it.next();
-//                        String key = me.getKey();
-//                        String value = me.getValue();
-//                        System.out.println("key="+key+",value="+value);
-//                }
         }
 
         //用List<Map<>>的形式取出指标+中文与单位名

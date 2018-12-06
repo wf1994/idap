@@ -1,6 +1,7 @@
 /target/
 !.mvn/wrapper/maven-wrapper.jar
 
+
 ### STS ###
 .apt_generated
 .classpath
@@ -23,3 +24,6 @@
 /dist/
 /nbdist/
 /.nb-gradle/
+.idea/src/main/resources/application.yml
+.idea/mvnw
+.idea/mvnw.cmd

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping(value = {"/hello"})
 public class helloController {
 
+
+
     @RequestMapping(value = {"/springboot"})
     public String hello(){
         return "HelloWord";

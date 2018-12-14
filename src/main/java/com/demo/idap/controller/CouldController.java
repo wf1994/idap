@@ -8,6 +8,7 @@ import com.demo.idap.service.GetCloudDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,9 +34,9 @@ public class CouldController {
         //根据level查询出每个云
         @RequestMapping(value = {"/getcloud"})
         @ResponseBody
-        public List<Cloudsort> getCloud() throws IOException {
+        public List<Cloudsort> getCloud(@RequestParam("level") int level) throws IOException {
 
-                List<Cloudsort> cloudsorts = getCloudDataService.getCloudSort(1);
+                List<Cloudsort> cloudsorts = getCloudDataService.getCloudSort(level);
                 return cloudsorts;
                 //keymap集合取数
         }
@@ -43,15 +44,15 @@ public class CouldController {
         //用List<Map<>>的形式取出指标+中文与单位名
         @RequestMapping(value = {"/getcloudata"})
         @ResponseBody
-        public List<Map<String, String>> getIndexChinese() throws IOException {
+        public List<Map<String, String>> getIndexChinese(@RequestParam("cloudcode") int cloudcode) throws IOException {
 
                 List<Map<String, String>> cloudresult = new ArrayList<Map<String, String>>();
                 Map<String, String> map = null;
-                List<CloudData> cloudindexChinese = getCloudDataService.getIndexChinese(10);
+                List<CloudData> cloudindexChinese = getCloudDataService.getIndexChinese(cloudcode);
                 for (CloudData item : cloudindexChinese) {
                         map = new HashMap<String, String>();
-                        map.put("key", item.getIndexcode());
-                        map.put("value", item.getChinesename() + "/" + item.getUnit());
+                        map.put(item.getIndexcode(),item.getChinesename() + "/" + item.getUnit());
+                       // map.put("value", item.getChinesename() + "/" + item.getUnit());
                         System.out.println(map);
                         cloudresult.add(map);
                 }
@@ -62,15 +63,15 @@ public class CouldController {
         //用List<Map<>>的形式取出指标+中文与单位名
         @RequestMapping(value = {"/getcloudalldata"})
         @ResponseBody
-        public List<Map<String, Object>> getIndexData() throws IOException {
+        public List<Map<String, Object>> getIndexData(@RequestParam("cloudcode") int cloudcode) throws IOException {
 
                 List<Map<String, Object>> cloudresult = new ArrayList<Map<String, Object>>();
                 Map<String, Object> map = null;
-                List<CloudAllData> cloudindexData = getCloudDataService.getIndexData(10);
+                List<CloudAllData> cloudindexData = getCloudDataService.getIndexData(cloudcode);
                 for (CloudAllData item : cloudindexData) {
                         map = new HashMap<String, Object>();
-                        map.put("key", item.getIndexcode());
-                        map.put("value", item.getData());
+                        map.put(item.getIndexcode(),item.getData());
+                        //map.put("value", item.getData());
                         System.out.println(map);
                         cloudresult.add(map);
                 }
@@ -81,11 +82,11 @@ public class CouldController {
         @RequestMapping(value = {"/getresult"})
         @ResponseBody
         //取出中文/单位+数据
-        public List<Map<String, Object>> getResult() throws IOException {
+        public List<Map<String, Object>> getResult(@RequestParam("cloudcode") int cloudcode) throws IOException {
 
                 List<Map<String, String>> cloudresult1 = new ArrayList<Map<String, String>>();
                 Map<String, String> map1 = null;
-                List<CloudData> cloudindexChinese = getCloudDataService.getIndexChinese(30);
+                List<CloudData> cloudindexChinese = getCloudDataService.getIndexChinese(cloudcode);
                 for (CloudData item1 : cloudindexChinese) {
                         map1 = new HashMap<String, String>();
                         map1.put(item1.getIndexcode(),item1.getChinesename() + "/" + item1.getUnit());
@@ -95,7 +96,7 @@ public class CouldController {
 
                 List<Map<String, Object>> cloudresult2 = new ArrayList<Map<String, Object>>();
                 Map<String, Object> map2 = null;
-                List<CloudAllData> cloudindexData = getCloudDataService.getIndexData(30);
+                List<CloudAllData> cloudindexData = getCloudDataService.getIndexData(cloudcode);
                 for (CloudAllData item2 : cloudindexData) {
                         map2 = new HashMap<String, Object>();
                         map2.put(item2.getIndexcode(),item2.getData());
@@ -130,9 +131,9 @@ public class CouldController {
         //查询三年（2016、2017、2018）的用户量数据
         @RequestMapping(value = {"/getyeardata"})
         @ResponseBody
-        public List<CloudAllData> getYearsData() throws IOException {
+        public List<CloudAllData> getYearsData(@RequestParam("indexcode") String indexcode,@RequestParam("cloudcode") int cloudcode) throws IOException {
 
-                List<CloudAllData> yeardata = getCloudDataService.getYearsData();
+                List<CloudAllData> yeardata = getCloudDataService.getYearsData(indexcode,cloudcode);
                 return yeardata;
         }
 

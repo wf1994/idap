@@ -14,21 +14,21 @@
 
   <!--根据level查询每个云-->
   <select id="getCloudSort" parameterType="int" resultType="Cloudsort">
-       SELECT  s.* FROM [TB_IADP_CLOUDSORT] s where s.level = ${level}
+       SELECT  s.CLOUDCODE,s.CNAME FROM [TB_IADP_CLOUDSORT] s where s.level = #{level}
     </select>
 
   <!--根据cloudcode取出指标+数据-->
   <select id="getIndexData" parameterType="int" resultType="CloudAllData">
-        SELECT  d.INDEXCODE,d.DATA FROM [TB_IADP_CLOUDATA3] d where d.year =2018 and d.CLOUDCODE = ${cloudcode}
+        SELECT  d.INDEXCODE,d.DATA FROM [TB_IADP_CLOUDATA3] d where d.year =2018 and d.CLOUDCODE = #{cloudcode}
     </select>
 
   <!--根据cloudcode取出指标+中文与单位名-->
   <select id="getIndexChinese" parameterType="int"  resultType="CloudData">
-       SELECT  d.INDEXCODE,d.UNIT,d.CHINESENAME FROM [TB_IADP_CLOUDATA2] d where d.CLOUDCODE = ${cloudcode}
+       SELECT  d.INDEXCODE,d.UNIT,d.CHINESENAME FROM [TB_IADP_CLOUDATA2] d where d.CLOUDCODE = #{cloudcode}
     </select>
 
-    <!--查询三年（2016、2017、2018）的用户量数据-->
+    <!--根据indexcode和cloudcode查询三年（2016、2017、2018）的用户量数据-->
     <select id="getYearsData"  resultType="CloudAllData">
-       SELECT  d.DATA,d.YEAR  FROM  [TB_IADP_CLOUDATA3] d where  d.INDEXCODE = 'A001'
+       SELECT  d.DATA,d.YEAR  FROM  [TB_IADP_CLOUDATA3] d where d.INDEXCODE = #{indexcode} and d.CLOUDCODE = #{cloudcode}
     </select>
 </mapper>

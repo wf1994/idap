@@ -23,5 +23,5 @@ public interface CloudDataMapper {
     //根据cloudcode取出指标+数据
     List<CloudAllData> getIndexData(@Param("cloudcode")int cloudcode);
     //查询三年（2016、2017、2018）的用户量数据-
-    public List<CloudAllData> getYearsData();
+    public List<CloudAllData> getYearsData(@Param("indexcode") String indexcode,@Param("cloudcode")int cloudcode);
 }

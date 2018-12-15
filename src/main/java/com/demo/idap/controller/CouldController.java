@@ -19,6 +19,7 @@ import java.util.*;
 
 @Controller
 @RequestMapping(value = {"/cloud"})
+
 public class CouldController {
         public GetCloudDataService getGetCloudDataService() {
                 return getCloudDataService;

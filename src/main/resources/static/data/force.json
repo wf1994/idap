@@ -1,0 +1,64 @@
+﻿[
+  {
+    "name": "综合平台",
+    "paraname": "广西北斗综合服务平台",
+    "interfacename": "COP",
+    "protocol": "标准协议"
+  },
+  {
+    "name": "东亚糖业",
+    "paraname": "东亚糖业北斗应用示范",
+    "interfacename": "SOA ",
+    "protocol": "定制协议"
+  },
+{
+    "name": "博庆糖业",
+    "paraname": "东亚糖业北斗应用示范",
+    "interfacename": "AIX",
+    "protocol": "标准协议"
+  },
+{
+    "name": "农机服务",
+    "paraname": "广西农机线上服务应用示范",
+    "interfacename": "COT",
+    "protocol": "标准协议"
+  },
+{
+    "name": "广西糖网",
+    "paraname": "广西糖业电子商务网",
+    "interfacename": "XDS ",
+    "protocol": "定制协议"
+  },
+{
+    "name": "智慧泊车",
+    "paraname": "银江智慧泊车管理系统",
+    "interfacename": "COP",
+    "protocol": "标准协议"
+  },
+{
+    "name": "南宁车联网",
+    "paraname": "南宁市城市交通车联网",
+    "interfacename": "COP",
+    "protocol": "标准协议"
+  },
+{
+    "name": "无车承运网",
+    "paraname": "广西无车承运服务网",
+    "interfacename": "SOA ",
+    "protocol": "标准协议"
+  },
+{
+    "name": "顺丰速递",
+    "paraname": "顺丰速递物流配送管理系统",
+    "interfacename": "COP",
+    "protocol": "定制协议"
+  },
+{
+    "name": "顺丰大数据",
+    "paraname": "顺丰大数据系统",
+    "interfacename": "AIX ",
+    "protocol": "标准协议"
+  }
+
+]
+

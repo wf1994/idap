@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/js/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../static/css/m.css">
+    <script type="text/javascript" src="../static/js/jquery3.3.1.js"></script>
+    <script type="text/javascript" src="../static/js/echarts.js"></script>
+    <script src="../static/js/guangxi.js"></script>
+    <script type="text/javascript" src="../static/js/bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <title>Title</title>
+</head>
+<body>
+﻿<div class="top_obligate">
+    <span id="title">广西北斗综合位置服务平台</span>
+        <a class="top-menu" >政务云</a>
+        <a class="top-menu" >交通云</a>
+        <a class="top-menu" >科教云</a>
+        <a class="top-menu" >建工云</a>
+        <a class="top-menu" >商贸云</a>
+        <a class="top-menu" >工业云</a>
+        <a class="top-menu" >糖业云</a>
+</div>
+﻿<div class="sub_obligate">
+    <span id="sub_text">北斗综合位置服务平台</span>
+</div>
+
+<div class="row" id="container_all">
+    <div class="row col-md-2" id="container_left">
+            <div class="col-md-12 thumbnail " id="draw_circle" name="综合">
+                <a href = "javascript:void(0);" onclick ="remove_table()">
+                    <img  src="../static/img/circle.png" alt="circle">
+                </a>
+            </div>
+            <div class="col-md-12 thumbnail" id="draw_map" name="物联网区域发展测评">
+                <a href = "javascript:void(0);" onclick ="remove_table()">
+                    <img src="../static/img/map.png" alt="map">
+                </a>
+            </div>
+            <div class="col-md-12 thumbnail" id="draw_force" name="广域物联网架构">
+                <a href = "javascript:void(0);" onclick ="remove_table()">
+                    <img  src="../static/img/force.jpg" alt="force">
+                </a>
+            </div>
+            <div class="col-md-12 thumbnail" id="draw_pie" name="广西北斗+行业应用现状">
+                <a href = "javascript:void(0);" onclick ="remove_table()">
+                    <img src="../static/img/pie.png" alt="pie">
+                </a>
+            </div>
+            <div class="col-md-12 thumbnail" id="draw_relationship" name="系统信息关联分析">
+                <a href = "javascript:void(0);" onclick ="remove_table()">
+                    <img src="../static/img/relationship.png" alt="relationship">
+                </a>
+            </div>
+            <div class="col-md-12 thumbnail" id="draw_bubble" name="北斗应用服务系统在线评价">
+                <a href = "javascript:void(0);" onclick ="remove_table()">
+                    <img  src="../static/img/bubble.jpg" alt="bubble">
+                </a>
+            </div>
+    </div>
+    <div class="col-md-10 row" id="container_right">
+        <div class="col-md-8" id="main">
+        </div>
+        <div class="col-md-4" id="table_data">
+            <div id="circle_data"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../static/js/draw.js"></script>
+</body>
+</html>

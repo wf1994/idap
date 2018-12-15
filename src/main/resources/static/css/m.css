@@ -1,0 +1,140 @@
+body{
+    background: url(../img/star.jpg);
+}
+/*头部*/
+.top_obligate{
+    color: white;
+    background-color:#18589A;
+    margin-top:-20px;
+    height: 40px;
+    padding-top: 5px;
+    padding-left: 15px
+}
+.sub_obligate{
+    font-family:Microsoft YaHei;
+    text-align:center;
+    font-weight:bold;
+    font-size: 15px;"
+    color: white;
+    background-color:#104E8B;
+    margin-top:-20px;
+    height: 30px;
+    padding-top: 5px;
+    padding-left: 15px
+}
+#sub_text{
+    color:#fff;
+}
+.top-menu{
+    color: white;
+}
+#title{
+    font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight:bold;
+    color:white;
+    font-size: 25px;
+}
+/*container容器*/
+#container_all{
+    margin: 0 auto;
+}
+/*左侧缩略图栏*/
+#container_left{
+    margin:0 auto;
+    height: 100%;
+    overflow:scroll
+}
+#draw_circle,#draw_map,#draw_bubble,#draw_force,#draw_pie,#draw_relationship{
+    height:200px;
+    background: transparent;
+}
+.thumbnail{
+    margin:0;
+    padding:0;
+    height: 120px;
+}
+.thumbnail a > img{
+    height: 100%;
+    width: 100%;
+}
+/*右侧内容*/
+#container_right{
+    height: 100%;
+}
+#main{
+    height:650px;
+    background:transparent;
+    position: relative;
+    margin: 0 auto
+}
+#drawing {
+    position: relative;
+    background-position:center;
+}
+a:hover{
+    height:300px;
+}
+
+.circle1 {
+    background-color: #EF7070;
+    position: absolute;
+    opacity: 0.7;
+}
+.circle1:hover
+{
+    background-color: #8968CD;
+}
+.circle2 {
+    background-color: #E6AE88;
+    position: absolute;
+    opacity: 0.7;
+}
+.circle2:hover
+{
+    background-color: #8968CD;
+}
+.circle3 {
+    background-color: #EFEF70;
+    position: absolute;
+    opacity: 0.7;
+}
+.circle3:hover
+{
+    background-color: #8968CD;
+}
+.circle4 {
+    background-color: #B9D898;
+    position: absolute;
+    opacity: 0.7;
+}
+.circle4:hover
+{
+    background-color: #8968CD;
+}
+.circle5 {
+    background-color: #BCBCEF;
+    position: absolute;
+    opacity: 0.7;
+}
+.circle5:hover
+{
+    background-color: #8968CD;
+}
+.circle6 {
+    background-color: #BCD6EF;
+    position: absolute;
+    opacity: 0.7;
+}
+.circle6:hover
+{
+    background-color: #8968CD;
+}
+.circle7 {
+    background-color: #E6CCFF;
+    position: absolute;
+    opacity: 0.7;
+}
+.circle7:hover
+{
+    background-color: #8968CD;
+}

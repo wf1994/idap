@@ -85,7 +85,7 @@ function show_map_table(name) {
 
 
     $("table").remove();
-    $.getJSON('data/test.json', function (data) {
+    $.getJSON('/test.json', function (data) {
 
         for (var i = 0; i < data.length; i++) {
             if (data[i].name === name) {

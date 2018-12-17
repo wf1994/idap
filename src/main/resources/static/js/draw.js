@@ -1117,19 +1117,23 @@ function getData(){
     alert("已经调用！");
     $.ajax({
         type:"post",
-        contentType:"application/json;charset=utf-8",
+        //contentType:"application/json;charset=utf-8",
         url:"http://localhost:8080/cloud/getcloud",
         dataType:"json",
         data:{level:1},
         success:function(data){
-                $("#cname_1").text(data[6].cname);
-                $("#cname_2").text(data[4].cname);
-                    console.log(data);
-                      },
+                $("#cname_1").text(data[0].cname);
+                $("#cname_2").text(data[1].cname);
+                $("#cname_3").text(data[2].cname);
+                $("#cname_4").text(data[3].cname);
+                $("#cname_5").text(data[4].cname);
+                $("#cname_6").text(data[5].cname);
+                $("#cname_7").text(data[6].cname);
+                console.log(data);
+                },
         error:function(e){
-                      console.log(e);
-             }
-
+                    console.log(e);
+                }
     });
 }
 window.onload = getData();
@@ -1137,47 +1141,47 @@ window.onload = getData();
 function draw_circle() {
 
     $("#main").html(
-        "<img src='./img/bg.png' style='width:630px;height:630px;margin-left: 30px'  ></body>\n" +
+        "<img src='/img/bg.png' style='width:630px;height:630px;margin-left: 30px'  ></body>\n" +
         "<div id=\"drawing\">\n" +
         "    <a href=\"javascript:func1()\" class='a_href' >\n" +
         "        <div class=\"circle1\" style=\"width: 150px;height: 150px;border-radius: 100px;left: 262px;top: -623px;\">\n" +
-        "           <div id= \"cname_1\" style=\"font-size:22px;left: 43px; position: absolute; top: 62px;\">1</div> \n" +
+        "           <div id= \"cname_1\" style=\"font-size:22px;left: 43px; position: absolute; top: 62px;\"></div> \n" +
         "        </div>\n" +
         "    </a>\n" +
         "\n" +
         "    <a href=\"javascript:func2()\" class='a_href' >\n" +
         "        <div class=\"circle2\" style=\"width: 150px;height: 150px;border-radius: 100px;left: 120px;top: -238px;\">\n" +
-        "            <div id= \"cname_2\"style=\"font-size:22px;left: 39px; position: absolute; top: 62px;\">1</div>\n" +
+        "            <div id= \"cname_2\"style=\"font-size:22px;left: 39px; position: absolute; top: 62px;\"></div>\n" +
         "        </div>\n" +
         "    </a>\n" +
         "\n" +
         "    <a href=\"javascript:func3()\" class='a_href' >\n" +
         "        <div class=\"circle3\" style=\"width: 150px;height: 150px;border-radius: 100px;left: 47px;top: -389px;\">\n" +
-        "             <div id= \"cname_3\"style=\"font-size:22px;left: 39px; position: absolute; top: 62px;\">教科云</div>\n" +
+        "             <div id= \"cname_3\"style=\"font-size:22px;left: 39px; position: absolute; top: 62px;\"></div>\n" +
         "        </div>\n" +
         "    </a>\n" +
         "\n" +
         "    <a href=\"javascript:func4()\" class='a_href' >\n" +
         "        <div class=\"circle4\" style=\"width: 150px;height: 150px;border-radius: 100px;left: 108px;top: -557px;\">\n" +
-        "              <div id= \"cname_4\"style=\"font-size:22px;left: 39px; position: absolute; top: 62px;\">建工云</div>\n" +
+        "              <div id= \"cname_4\"style=\"font-size:22px;left: 39px; position: absolute; top: 62px;\"></div>\n" +
         "        </div>\n" +
         "    </a>\n" +
         "\n" +
         "    <a href=\"javascript:func5()\" class='a_href' >\n" +
         "        <div class=\"circle5\" style=\"width: 150px;height: 150px;border-radius: 100px;left: 427px;top: -247px;\">\n" +
-        "             <div id= \"cname_5\"style=\"font-size:22px;left: 39px; position: absolute; top: 62px;\">商贸云</div>\n" +
+        "             <div id= \"cname_5\"style=\"font-size:22px;left: 39px; position: absolute; top: 62px;\"></div>\n" +
         "        </div>\n" +
         "    </a>\n" +
         "\n" +
         "    <a href=\"javascript:func6()\" class='a_href' >\n" +
         "        <div class=\"circle6\" style=\"width: 150px;height: 150px;border-radius: 100px;left: 418px;top: -567px;\">\n" +
-        "              <div id= \"cname_6\"style=\"font-size:22px;left: 39px; position: absolute; top: 62px;\">工业云</div>\n" +
+        "              <div id= \"cname_6\"style=\"font-size:22px;left: 39px; position: absolute; top: 62px;\"></div>\n" +
         "        </div>\n" +
         "    </a>\n" +
         "\n" +
         "    <a href=\"javascript:func7()\" class='a_href' >\n" +
         "        <div class=\"circle7\" style=\"width: 150px;height: 150px;border-radius: 100px;left: 491px;top: -403px;\">\n" +
-        "             <div id= \"cname_7\"style=\"font-size:22px;left: 39px; position: absolute; top: 62px;\"> 糖业云</div>\n" +
+        "             <div id= \"cname_7\"style=\"font-size:22px;left: 39px; position: absolute; top: 62px;\"></div>\n" +
         "        </div>\n" +
         "    </a>")
     $(".a_href").on("click", function () {

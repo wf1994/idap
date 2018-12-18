@@ -30,7 +30,10 @@ public class CouldController {
          */
         @Autowired
         private GetCloudDataService getCloudDataService;
-
+        @RequestMapping(value = {"/loginHtml"})
+        public String loginHtml(){
+                return "m";
+        }
 
         //根据level查询出每个云
         @RequestMapping(value = {"/getcloud"})

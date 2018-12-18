@@ -2,14 +2,14 @@
  * Created by lyh on 2018/4/15.
  */
 //设置左边缩略图部分高度随浏览器高度变化
-/*function setHeight() {
+function setHeight() {
     var height=$(window).height();
     $("#container_all").css("height",height);
 }
 window.onload=setHeight();
 $(window).resize(function () {
     setHeight();
-});*/
+});
 
 //点击画图、改表头 
 $(document).ready(function (){
@@ -312,7 +312,6 @@ function func_12() {
 
     myChart.setOption(option, true);
 }
-
 //右上角故障率
 function func_13() {
     var myChart = echarts.init(document.getElementById('cont_main'));
@@ -753,7 +752,6 @@ function func1() {
     $("#table_data").append($test);
 
 }
-
 function func2() {
 
     $("table").remove();
@@ -813,7 +811,6 @@ function func2() {
     $("#table_data").append($test);
 
 }
-
 function func3() {
 
     $("table").remove();
@@ -873,7 +870,6 @@ function func3() {
     $("#table_data").append($test);
 
 }
-
 function func4() {
 
     $("table").remove();
@@ -933,7 +929,6 @@ function func4() {
     $("#table_data").append($test);
 
 }
-
 function func5() {
 
     $("table").remove();
@@ -993,7 +988,6 @@ function func5() {
     $("#table_data").append($test);
 
 }
-
 function func6() {
 
     $("table").remove();
@@ -1198,7 +1192,6 @@ function draw_circle() {
     myChart.setOption(option);
     console.log("111")
 }
-
 function draw_map() {
     $("button").remove();
     $("#circle_data").html("");
@@ -1412,7 +1405,6 @@ function draw_map() {
 
     myChart.setOption(option, true);
 }
-
 function draw_bubble() {
     $("button").remove();
     $("#circle_data").html("");
@@ -1556,8 +1548,6 @@ function draw_bubble() {
 
     myChart.setOption(option, true);
 }
-
-
 function draw_relationship() {
     $("button").remove();
     $("#circle_data").html("");
@@ -1983,8 +1973,6 @@ function draw_relationship() {
     });
     myChart.setOption(option,true);
 }
-
-
 function draw_pie() {
     $("button").remove();
     $("#circle_data").html("");
@@ -2248,7 +2236,6 @@ function draw_pie() {
     };
     myChart.setOption(option, true);
 }
-
 function draw_force() {
     $("button").remove();
     $("#circle_data").html("");

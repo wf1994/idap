@@ -1,0 +1,34 @@
+body{
+    font-family: "Microsoft YaHei";
+    background: #fff;
+    margin: 0px;
+    padding: 0px;
+}
+.loginmain{
+    height: 500px;
+}
+.loginright{
+    width: 100%;
+    height:450px;
+    margin: auto;
+    top:30px;
+    position: relative;
+    background:url(../img/login.png) no-repeat center center;
+    background-size:cover;
+}
+.btn-primary{
+    background-color: #ff7f19;
+    border-color: #fa7811;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.focus,
+.btn-primary:active,
+.btn-primary.active,
+.open > .dropdown-toggle.btn-primary {
+    background-color: #fa7811;
+    border-color: #fa7811;
+}
+.col-sm-12{
+    width:100%;
+}

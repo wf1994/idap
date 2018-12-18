@@ -64,7 +64,7 @@ public class CouldController {
 
         }
 
-        //用List<Map<>>的形式取出指标+中文与单位名
+        //用List<Map<>>的形式取出指标+数据
         @RequestMapping(value = {"/getcloudalldata"})
         @ResponseBody
         public List<Map<String, Object>> getIndexData(@RequestParam("cloudcode") int cloudcode) throws IOException {
@@ -110,11 +110,8 @@ public class CouldController {
                 }
                 List<Map<String, Object>> cloudresult3 = new ArrayList<Map<String, Object>>();
                 for(Map<String,String> s1:cloudresult1){
-
                         for(Map<String,Object> s2:cloudresult2) {
-
                                 Iterator<String> iter1 = s1.keySet().iterator();
-
                                 Iterator<String> iter2 = s2.keySet().iterator();
                                 if (iter1.hasNext()) {
                                         String m1Key = (String) iter1.next();

@@ -67,6 +67,13 @@ body{
     position: relative;
     margin: 0 auto
 }
+.table_ajax{
+    color: white;
+    height: 250px
+}
+td{
+    color: white
+}
 #drawing {
     position: relative;
     background-position:center;

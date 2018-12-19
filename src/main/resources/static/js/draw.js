@@ -697,6 +697,23 @@ function func1() {
 
     $("table").remove();
     $("button").remove();
+    $.ajax({
+        type:"post",
+        //contentType:"application/json;charset=utf-8",
+        url:"http://localhost:8080/cloud/getresult",
+        dataType:"json",
+        data:{cloudcode:10},
+        success:function(data){
+            console.log(data);
+            for(var key in data){
+                console.log(data.key + ":" + data[key]);
+            }
+            cloudData = data;
+        },
+        error:function(e){
+            console.log(e);
+        }
+    });
     var $test = $("<button onclick=\"func_11()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Tooltip on left\">用户数</button>\n" +
         "\n" +
         "<button onclick=\"func_12()\"  type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Tooltip on top\">终端数</button>\n" +
@@ -704,52 +721,38 @@ function func1() {
         "<button onclick=\"func_13()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Tooltip on bottom\">故障率</button>\n" +
         "\n" +
         "<button onclick=\"func_14()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Tooltip on right\">投诉率</button>\n" +
-        "<table class=\"table table-hover\" style=\"color: white;height: 250px\">\n" +
-        "    <thead>\n" +
-        "    <tr>\n" +
-        "        <td id=\\\"table_head\\\"></td>\n" +
-        "    </tr>\n" +
-        "    </thead>\n" +
-        "    <tbody>\n" +
-        "    <tr>\n" +
-        "        <td>注册客户数</td>\n" +
-        "        <td>1</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>用户访问总人次</td>\n" +
-        "        <td>1241081</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>单日用户访问人次</td>\n" +
-        "        <td>322</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>北斗终端接入数</td>\n" +
-        "        <td>2300</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>可用性指标</td>\n" +
-        "        <td>99.95%</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>平均故障间隔时间（MTBF）</td>\n" +
-        "        <td>1120小时</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>平均故障修复时间(MTTR)</td>\n" +
-        "        <td>0.8小时</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>当月客户意见反馈数</td>\n" +
-        "        <td>10</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>当月客户投诉率</td>\n" +
-        "        <td>0%</td>\n" +
-        "    </tr>\n" +
-        "    </tbody>\n" +
-        "</table>");
-    $("#table_data").append($test);
+        "<table class=\"table table-hover\">\n" );
+
+    alert(cloudData[0].A001);
+
+    //create thead
+    var table = document.createElement("table");
+    table.className = "table_ajax";
+    var thead = document.createElement("thead");
+    var thead_tr = document.createElement("tr");
+    var thead_td = document.createElement("td");
+    thead_td.id = "table_head";
+    var thead_td_text = cloudData[0].A001;
+    document.createTextNode(thead_td_text);
+    $(thead_td).append(thead_td_text);
+    $(thead_tr).append(thead_td);
+    $(thead).append(thead_tr);
+    $(table).append(thead);
+    //create tbody
+
+    var tbody = document.createElement("tbody");
+    var text = cloudData[0].A001;
+    $(tbody).append(document.createElement("tr"));
+    $(tbody.childNodes[0]).append(document.createElement("td"));
+    $(tbody.td).append(document.createTextNode(text));
+   /* for (var i = 0;i<cloudData.length;i++){
+        var text  =  eval(cloudData.A00[i+1]);
+        alert(cloudData[i]);
+        $(tbody).append(document.createElement("tr"));
+        $(tbody.childNodes[i]).append(document.createElement("td"));
+        $(tbody.childNodes.td).append(document.createTextNode("text"));
+    }*/
+    $("#table_data").append($test,table,tbody);
 
 }
 function func2() {

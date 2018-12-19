@@ -704,11 +704,12 @@ function func1() {
         dataType:"json",
         data:{cloudcode:10},
         success:function(data){
-            console.log(data);
-            for(var key in data){
-                console.log(data.key + ":" + data[key]);
-            }
-            cloudData = data;
+            data.forEach((item,index)=>{
+                for(var key in item){
+                    console.log(key);
+                    console.log(item[key]);
+                }
+            });
         },
         error:function(e){
             console.log(e);

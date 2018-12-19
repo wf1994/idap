@@ -1,6 +1,4 @@
-/**
- * Created by lyh on 2018/4/15.
- */
+var idenData=[];
 //设置左边缩略图部分高度随浏览器高度变化
 function setHeight() {
     var height=$(window).height();
@@ -704,7 +702,17 @@ function func1() {
         dataType:"json",
         data:{cloudcode:10},
         success:function(data){
-            data.forEach((item,index)=>{
+            var iden = Object.getOwnPropertyNames(data[0])[0];
+            console.log(iden)
+            for(var i=0;i<data.length;i++){
+                var name=Object.getOwnPropertyNames(data[i]);
+                var value= data[i][name];
+                //console.log(name)
+                //console.log(value)
+                idenData.push({name:name,value:data[i][name]})
+                //console.log(idenData)
+            }
+            data.forEach(function(item){
                 for(var key in item){
                     console.log(key);
                     console.log(item[key]);

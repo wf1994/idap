@@ -2,16 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>广西北斗综合位置服务平台</title>
+
+    <link rel="stylesheet" href="/js/bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="/js/bootstrap-3.3.7-dist/css/bootstrap-reset.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <title >广西北斗综合位置服务平台</title>
 </head>
-<body style="background:#eeeff6">
-<h1>广西北斗综合位置服务平台</h1>
-登录
-<form action="/user/userlogin" method="post">
-    用户名：<input type="text" name="username" /><br>
-    密&nbsp;&nbsp;&nbsp;码：<input type="password" name="password" /><br>
-    <input type="submit" value="登录" />
-    <a href="/user/registerpage" target="_blank">注册</a>
-</form>
+<body style="background: #F2F2F2">
+<!--<h1 style="text-align: center">广西北斗综合位置服务平台</h1>-->
+<h1  style="color:#01005E;margin-top: 20px;margin-bottom: 10px;margin-left: 20px;">广西北斗综合位置服务平台</h1>
+
+<div class="loginmain">
+    <div class="loginright">
+        <div style="positon:absolute;right:0;top:80px;background-color:rgba(205,222,253,0.5);width:320px;overflow:hidden;
+        float: right;margin: 80px 50px; border-radius:6px;padding: 0px 15px 0px 15px">
+            <form class="form-horizontal " action="/user/userlogin" method="post">
+                <div class="form-group">
+                    <div class="col-sm-12 panel-heading" style="background: #5f96f8;color:#fff;">
+                        请登录
+                    </div>
+                </div>
+                <div class="form-group" style="padding-top: 20px" >
+                    <div class="col-sm-12 ">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon glyphicon glyphicon-user reset-glyphicon"></span>
+                            <input type="text" class="form-control" name="username" style="font-size: 16px" placeholder="用户名">
+                        </div>
+                    </div>
+                </div>
+                <div  class="form-group" >
+                    <div class="col-sm-12 ">
+                        <div class="input-group input-group-lg">
+                            <span class="input-group-addon glyphicon glyphicon-lock reset-glyphicon"></span>
+                            <input type="password" class="form-control" name="password" style="font-size: 16px"placeholder="密码">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12 ">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> 下次自动登录
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-12 ">
+                        <button type="submit" class="btn btn-primary col-sm-12">登&nbsp;录</button>
+                    </div>
+                </div>
+                <!--<a href="/user/registerpage" target="_blank">注册</a>-->
+            </form>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>

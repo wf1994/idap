@@ -1,15 +1,14 @@
-/**
- * Created by lyh on 2018/4/15.
- */
+var cdata=[];//云数据
+var idenData=[];
 //设置左边缩略图部分高度随浏览器高度变化
-/*function setHeight() {
-    var height=$(window).height();
+function setHeight() {
+    var height=$(document).height();
     $("#container_all").css("height",height);
 }
 window.onload=setHeight();
 $(window).resize(function () {
     setHeight();
-});*/
+});
 
 //点击画图、改表头 
 $(document).ready(function (){
@@ -21,6 +20,7 @@ $(".thumbnail").on("click", function () {
     var id = $(this).prop("id");
     eval(id + "()");
     $("#table_head").text($(this).attr("name"));  //show_xx_table()函数体中使用
+    getData();
 })
 
 function remove_table() {
@@ -312,7 +312,6 @@ function func_12() {
 
     myChart.setOption(option, true);
 }
-
 //右上角故障率
 function func_13() {
     var myChart = echarts.init(document.getElementById('cont_main'));
@@ -698,62 +697,53 @@ function func1() {
 
     $("table").remove();
     $("button").remove();
-    var $test = $("<button onclick=\"func_11()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Tooltip on left\">用户数</button>\n" +
+
+    var test = "<button onclick=\"func_11()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Tooltip on left\">用户数</button>\n" +
         "\n" +
         "<button onclick=\"func_12()\"  type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Tooltip on top\">终端数</button>\n" +
         "\n" +
         "<button onclick=\"func_13()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Tooltip on bottom\">故障率</button>\n" +
         "\n" +
         "<button onclick=\"func_14()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Tooltip on right\">投诉率</button>\n" +
-        "<table class=\"table table-hover\" style=\"color: white;height: 250px\">\n" +
-        "    <thead>\n" +
-        "    <tr>\n" +
-        "        <td id=\\\"table_head\\\"></td>\n" +
-        "    </tr>\n" +
-        "    </thead>\n" +
-        "    <tbody>\n" +
-        "    <tr>\n" +
-        "        <td>注册客户数</td>\n" +
-        "        <td>1</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>用户访问总人次</td>\n" +
-        "        <td>1241081</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>单日用户访问人次</td>\n" +
-        "        <td>322</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>北斗终端接入数</td>\n" +
-        "        <td>2300</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>可用性指标</td>\n" +
-        "        <td>99.95%</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>平均故障间隔时间（MTBF）</td>\n" +
-        "        <td>1120小时</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>平均故障修复时间(MTTR)</td>\n" +
-        "        <td>0.8小时</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>当月客户意见反馈数</td>\n" +
-        "        <td>10</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>当月客户投诉率</td>\n" +
-        "        <td>0%</td>\n" +
-        "    </tr>\n" +
-        "    </tbody>\n" +
-        "</table>");
-    $("#table_data").append($test);
+        "<table class=\"table table-hover\" style=\"color: white;height: 250px\">\n";
+        for (var i = 0; i < idenData.length;i++){
+       test+= "    <tr>\n" +
+        "        <td></td>\n" +
+        "        <td></td>\n" +
+        "    </tr>\n";
+        }
+       test+= "</table>";
+
+    /*//create thead
+    var table = document.createElement("table");
+    table.className = "table_ajax";
+    var thead = document.createElement("thead");
+    var thead_tr = document.createElement("tr");
+    var thead_td = document.createElement("td");
+    thead_td.id = "table_head";
+    var thead_td_text = cloudData[0].A001;
+    document.createTextNode(thead_td_text);
+    $(thead_td).append(thead_td_text);
+    $(thead_tr).append(thead_td);
+    $(thead).append(thead_tr);
+    $(table).append(thead);
+    //create tbody
+
+    var tbody = document.createElement("tbody");
+    var text = cloudData[0].A001;
+    $(tbody).append(document.createElement("tr"));
+    $(tbody.childNodes[0]).append(document.createElement("td"));
+    $(tbody.td).append(document.createTextNode(text));
+   /!* for (var i = 0;i<cloudData.length;i++){
+        var text  =  eval(cloudData.A00[i+1]);
+        alert(cloudData[i]);
+        $(tbody).append(document.createElement("tr"));
+        $(tbody.childNodes[i]).append(document.createElement("td"));
+        $(tbody.childNodes.td).append(document.createTextNode("text"));
+    }*!/*/
+    $("#table_data").append(test);
 
 }
-
 function func2() {
 
     $("table").remove();
@@ -813,7 +803,6 @@ function func2() {
     $("#table_data").append($test);
 
 }
-
 function func3() {
 
     $("table").remove();
@@ -873,7 +862,6 @@ function func3() {
     $("#table_data").append($test);
 
 }
-
 function func4() {
 
     $("table").remove();
@@ -933,7 +921,6 @@ function func4() {
     $("#table_data").append($test);
 
 }
-
 function func5() {
 
     $("table").remove();
@@ -993,7 +980,6 @@ function func5() {
     $("#table_data").append($test);
 
 }
-
 function func6() {
 
     $("table").remove();
@@ -1112,34 +1098,45 @@ function func7() {
     $("#table_data").append($test);
 
 }
-
 function getData(){
     alert("已经调用！");
+    var data="level=1";
     $.ajax({
         type:"post",
-        //contentType:"application/json;charset=utf-8",
+        //contentType:"application/json",
         url:"http://localhost:8080/cloud/getcloud",
         dataType:"json",
-        data:{level:1},
+        data:data,
         success:function(data){
-                $("#cname_1").text(data[0].cname);
-                $("#cname_2").text(data[1].cname);
-                $("#cname_3").text(data[2].cname);
-                $("#cname_4").text(data[3].cname);
-                $("#cname_5").text(data[4].cname);
-                $("#cname_6").text(data[5].cname);
-                $("#cname_7").text(data[6].cname);
-                console.log(data);
-                },
-        error:function(e){
-                    console.log(e);
-                }
+            for(var i=0;i<data.length;i++){
+                var cname = data[i].cname;
+                var code = data[i].cloudcode;
+                cdata.push({name:cname,value:code})
+            }
+
+            $("#cname_1").text(cdata[0].name);
+            $("#cname_1").attr("cloudcode",cdata[0].value);
+            $("#cname_2").text(cdata[1].name);
+            $("#cname_2").attr("cloudcode",cdata[1].value);
+            $("#cname_3").text(cdata[2].name);
+            $("#cname_3").attr("cloudcode",cdata[2].value);
+            $("#cname_4").text(cdata[3].name);
+            $("#cname_4").attr("cloudcode",cdata[3].value);
+            $("#cname_5").text(cdata[4].name);
+            $("#cname_5").attr("cloudcode",cdata[4].value);
+            $("#cname_6").text(cdata[5].name);
+            $("#cname_6").attr("cloudcode",cdata[5].value);
+            $("#cname_7").text(cdata[6].name);
+            $("#cname_7").attr("cloudcode",cdata[6].value);
+        },
+        error:function(e){
+            console.log(e);
+        }
     });
 }
 window.onload = getData();
-
+$("#draw_circle").on(getData);
 function draw_circle() {
-
     $("#main").html(
         "<img src='/img/bg.png' style='width:630px;height:630px;margin-left: 30px'  ></body>\n" +
         "<div id=\"drawing\">\n" +
@@ -1184,21 +1181,45 @@ function draw_circle() {
         "             <div id= \"cname_7\"style=\"font-size:22px;left: 39px; position: absolute; top: 62px;\"></div>\n" +
         "        </div>\n" +
         "    </a>")
+    /*$("#main").live("click",function(){
+        var imgsrc = $(this).attr("ccode");
+        alert(imgsrc);
+    });*/
     $(".a_href").on("click", function () {
         $("#circle_data").html("<div id='cont_main' style='width: 300px; height: 200px; left: -20px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;'><div style='position: relative; overflow: hidden; width: 300px; height: 200px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;'><canvas data-zr-dom-id='zr_0' width='600' height='400' style='position: absolute; left: 0px; top: 0px; width: 300px; height: 300px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;'></canvas></div><div style='position: absolute; display: none; border-style: solid; white-space: nowrap; z-index: 9999999; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1), top 0.4s cubic-bezier(0.23, 1, 0.32, 1); background-color: rgba(50, 50, 50, 0.7); border-width: 0px; border-color: rgb(51, 51, 51); border-radius: 4px; color: rgb(255, 255, 255); font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 14px; font-family: &quot;Microsoft YaHei&quot;; line-height: 21px; padding: 5px; left: 433px; top: 322px;'>销量<br><span style='display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:#c23531;'></span>高跟鞋: 10</div></div>")
+        var code = $(this).children().children().attr("cloudcode");
+        console.log(code)
+        var data ="cloudcode="+code;
+        $.ajax({
+            type: "post",
+            //contentType:"application/json;charset=utf-8",
+            url: "http://localhost:8080/cloud/getresult",
+            dataType: "json",
+            data:data,
+            success: function (data) {
+                console.log(data)
+                var iden = Object.getOwnPropertyNames(data[0]);
+                console.log(iden)
+                for (var i = 0; i < data.length; i++) {
+                    var name = Object.getOwnPropertyNames(data[i]);
+                    var value = data[i][name];
+                    //console.log(name)
+                    //console.log(value)
+                    idenData.push({name: name, value: value})
+                    //console.log(idenData)
+                }
+                data.forEach(function (item) {
+                    for (var key in item) {
+
+                    }
+                });
+            },
+            error: function (e) {
+                console.log(e);
+            }
+        });
     })
-    var myChart = echarts.init(document.getElementById('cont_main'));
-    // 指定图表的配置项和数据
-    var colors = ['#5793f3', '#d14a61', '#675bba'];
-
-
-    var option = {};
-
-    // 使用刚指定的配置项和数据显示图表。
-    myChart.setOption(option);
-    console.log("111")
 }
-
 function draw_map() {
     $("button").remove();
     $("#circle_data").html("");
@@ -1412,7 +1433,6 @@ function draw_map() {
 
     myChart.setOption(option, true);
 }
-
 function draw_bubble() {
     $("button").remove();
     $("#circle_data").html("");
@@ -1556,8 +1576,6 @@ function draw_bubble() {
 
     myChart.setOption(option, true);
 }
-
-
 function draw_relationship() {
     $("button").remove();
     $("#circle_data").html("");
@@ -1983,8 +2001,6 @@ function draw_relationship() {
     });
     myChart.setOption(option,true);
 }
-
-
 function draw_pie() {
     $("button").remove();
     $("#circle_data").html("");
@@ -2248,7 +2264,6 @@ function draw_pie() {
     };
     myChart.setOption(option, true);
 }
-
 function draw_force() {
     $("button").remove();
     $("#circle_data").html("");

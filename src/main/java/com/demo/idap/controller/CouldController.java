@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
+import java.util.logging.Level;
 
 
 @Controller
@@ -38,7 +39,7 @@ public class CouldController {
         //根据level查询出每个云
         @RequestMapping(value = {"/getcloud"})
         @ResponseBody
-        public List<Cloudsort> getCloud(@RequestParam("level") int level) throws IOException {
+        public List<Cloudsort> getCloud(int level) throws IOException {
 
                 List<Cloudsort> cloudsorts = getCloudDataService.getCloudSort(level);
                 return cloudsorts;
@@ -86,7 +87,7 @@ public class CouldController {
         @RequestMapping(value = {"/getresult"})
         @ResponseBody
         //取出中文/单位+数据
-        public List<Map<String, Object>> getResult(@RequestParam("cloudcode") int cloudcode) throws IOException {
+        public List<Map<String, Object>> getResult(int cloudcode) throws IOException {
 
                 List<Map<String, String>> cloudresult1 = new ArrayList<Map<String, String>>();
                 Map<String, String> map1 = null;

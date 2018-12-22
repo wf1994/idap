@@ -703,11 +703,11 @@ function func1() {
         data:{cloudcode:10},
         success:function(data){
             var iden = Object.getOwnPropertyNames(data[0])[0];
-            console.log(iden)
+            //console.log(iden);
             for(var i=0;i<data.length;i++){
                 var name=Object.getOwnPropertyNames(data[i]);
                 var value= data[i][name];
-                //console.log(name)
+                console.log(name)
                 //console.log(value)
                 idenData.push({name:name,value:data[i][name]})
                 //console.log(idenData)
@@ -731,9 +731,6 @@ function func1() {
         "\n" +
         "<button onclick=\"func_14()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Tooltip on right\">投诉率</button>\n" +
         "<table class=\"table table-hover\">\n" );
-
-    alert(cloudData[0].A001);
-
     //create thead
     var table = document.createElement("table");
     table.className = "table_ajax";
@@ -754,14 +751,8 @@ function func1() {
     $(tbody).append(document.createElement("tr"));
     $(tbody.childNodes[0]).append(document.createElement("td"));
     $(tbody.td).append(document.createTextNode(text));
-   /* for (var i = 0;i<cloudData.length;i++){
-        var text  =  eval(cloudData.A00[i+1]);
-        alert(cloudData[i]);
-        $(tbody).append(document.createElement("tr"));
-        $(tbody.childNodes[i]).append(document.createElement("td"));
-        $(tbody.childNodes.td).append(document.createTextNode("text"));
-    }*/
-    $("#table_data").append($test,table,tbody);
+
+    $("#table_data").append($test);
 
 }
 function func2() {

@@ -14,7 +14,7 @@ body{
     font-family:Microsoft YaHei;
     text-align:center;
     font-weight:bold;
-    font-size: 15px;"
+    font-size: 15px;
     color: white;
     background-color:#104E8B;
     margin-top:-20px;
@@ -45,13 +45,13 @@ body{
     overflow:scroll
 }
 #draw_circle,#draw_map,#draw_bubble,#draw_force,#draw_pie,#draw_relationship{
-    height:200px;
+
     background: transparent;
 }
 .thumbnail{
     margin:0;
     padding:0;
-    height: 120px;
+    height: 140px;
 }
 .thumbnail a > img{
     height: 100%;

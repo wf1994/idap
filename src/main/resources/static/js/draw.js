@@ -493,12 +493,21 @@ function show_table() {
                 var value= idenData[i].value;
                 tbody.rows[i].cells[0].appendChild(document.createTextNode(name));
                 tbody.rows[i].cells[1].appendChild(document.createTextNode(value));
-                //console.log(name)
-                //console.log(value)
-                //idenData.push({name:name,value:data[i][name]})
-                //console.log(idenData)
             }
 }
+/*//画表格
+"   <table class=\"table table-hover \" style=\"color: white;width:250px;height: 250px\">\n";
+for (var i = 0; i < idenData.length;i++){
+    test+= "    <tr>\n" +
+        "        <td>\n"+idenData[i].name+"</td>\n" +
+        "        <td>\n"+idenData[i].value+"</td>\n" +
+        "    </tr>\n";
+}
+test+= "</table>\n" +
+    "<\div>\n" +
+    "\n" +
+    "<\div>\n";
+$("#table_data").append(test);*/
 //获取云和code
 function getData(){
     alert("已经调用！");

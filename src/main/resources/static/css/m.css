@@ -1,5 +1,5 @@
 body{
-    background: url(../img/star.jpg);
+    background: url(../img/dark-paths.png);
 }
 /*头部*/
 .top_obligate{
@@ -67,11 +67,18 @@ body{
     position: relative;
     margin: 0 auto
 }
-.table_ajax{
+.btn{
+    margin-bottom: 20px;
+}
+table{
+    padding-top: 350px;
     color: white;
-    height: 250px
+    height: 250px;
+    width: 300px
 }
 td{
+    border-collapse:collapse;
+    border:1px solid white;
     color: white
 }
 #drawing {

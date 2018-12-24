@@ -266,8 +266,20 @@ function show_map_table2() {
 
 //右上角用户数
 function func_11() {
-
-
+    $.ajax({
+        type:"post",
+        //contentType:"application/json;charset=utf-8",
+        url:"http://localhost:8080/cloud/getyeardata",
+        dataType:"json",
+        data:{cloudcode:code,indexcode:10},
+        success:function(yeardata){
+            console.log(yeardata);
+            console.log("func11 连接成功")
+        },
+        error:function(e){
+            console.log(e);
+        }
+    });
     var myChart = echarts.init(document.getElementById('cont_main'));
 
     option = {
@@ -704,84 +716,48 @@ function func1() {
         dataType:"json",
         data:{cloudcode:10},
         success:function(data){
-            var iden = Object.getOwnPropertyNames(data[0])[0];
-            //console.log(iden);
-            for(var i=0;i<data.length;i++){
+            //创建表单
+            var $test = $("<button onclick=\"func_11()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Tooltip on left\">用户数</button>\n" +
+                "\n" +
+                "<button onclick=\"func_12()\"  type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Tooltip on top\">终端数</button>\n" +
+                "\n" +
+                "<button onclick=\"func_13()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Tooltip on bottom\">故障率</button>\n" +
+                "\n" +
+                "<button onclick=\"func_14()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Tooltip on right\">投诉率</button>\n" +
+                 ""   );
+            var table = document.createElement("table");
+            var tbody = document.createElement("tbody");
+            $(table).append(tbody);
+            $("#table_data").append($test,table);
+            for(var i=0; i<data.length;i++){
+                tbody.insertRow(i);
+                tbody.rows[i].insertCell(0);
+                tbody.rows[i].insertCell(1);
                 var name=Object.getOwnPropertyNames(data[i]);
                 var value= data[i][name];
-                console.log(name)
+                tbody.rows[i].cells[0].appendChild(document.createTextNode(name));
+                tbody.rows[i].cells[1].appendChild(document.createTextNode(value));
+                //console.log(name)
                 //console.log(value)
-                idenData.push({name:name,value:data[i][name]})
+                //idenData.push({name:name,value:data[i][name]})
                 //console.log(idenData)
             }
+
+            var iden = Object.getOwnPropertyNames(data[0])[0];
+            //console.log(iden);
+
             data.forEach(function(item){
                 for(var key in item){
-                    console.log(key);
-                    console.log(item[key]);
+                    //console.log(key);
+                    //console.log(item[key]);
                 }
             });
         },
         error:function(e){
             console.log(e);
         }
+
     });
-    var $test = $("<button onclick=\"func_11()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Tooltip on left\">用户数</button>\n" +
-
-    var test = "<button onclick=\"func_11()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Tooltip on left\">用户数</button>\n" +
-        "\n" +
-        "<button onclick=\"func_12()\"  type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Tooltip on top\">终端数</button>\n" +
-        "\n" +
-        "<button onclick=\"func_13()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Tooltip on bottom\">故障率</button>\n" +
-        "\n" +
-        "<button onclick=\"func_14()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Tooltip on right\">投诉率</button>\n" +
-
-        "<table class=\"table table-hover\">\n" );
-    //create thead
-
-        "<table class=\"table table-hover\" style=\"color: white;height: 250px\">\n";
-        for (var i = 0; i < idenData.length;i++){
-       test+= "    <tr>\n" +
-        "        <td></td>\n" +
-        "        <td></td>\n" +
-        "    </tr>\n";
-        }
-       test+= "</table>";
-
-    /*//create thead
->>>>>>> 1fad6b45893b703ecaf643cb8f63761bf6549303
-    var table = document.createElement("table");
-    table.className = "table_ajax";
-    var thead = document.createElement("thead");
-    var thead_tr = document.createElement("tr");
-    var thead_td = document.createElement("td");
-    thead_td.id = "table_head";
-    var thead_td_text = cloudData[0].A001;
-    document.createTextNode(thead_td_text);
-    $(thead_td).append(thead_td_text);
-    $(thead_tr).append(thead_td);
-    $(thead).append(thead_tr);
-    $(table).append(thead);
-    //create tbody
-
-    var tbody = document.createElement("tbody");
-    var text = cloudData[0].A001;
-    $(tbody).append(document.createElement("tr"));
-    $(tbody.childNodes[0]).append(document.createElement("td"));
-    $(tbody.td).append(document.createTextNode(text));
-<<<<<<< HEAD
-
-    $("#table_data").append($test);
-=======
-   /!* for (var i = 0;i<cloudData.length;i++){
-        var text  =  eval(cloudData.A00[i+1]);
-        alert(cloudData[i]);
-        $(tbody).append(document.createElement("tr"));
-        $(tbody.childNodes[i]).append(document.createElement("td"));
-        $(tbody.childNodes.td).append(document.createTextNode("text"));
-    }*!/*/
-    $("#table_data").append(test);
-
-
 }
 function func2() {
 
@@ -1174,7 +1150,9 @@ function getData(){
     });
 }
 window.onload = getData();
+
 $("#draw_circle").on(getData);
+
 function draw_circle() {
     $("#main").html(
         "<img src='/img/bg.png' style='width:630px;height:630px;margin-left: 30px'  ></body>\n" +
@@ -1226,37 +1204,35 @@ function draw_circle() {
     });*/
     $(".a_href").on("click", function () {
         $("#circle_data").html("<div id='cont_main' style='width: 300px; height: 200px; left: -20px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;'><div style='position: relative; overflow: hidden; width: 300px; height: 200px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;'><canvas data-zr-dom-id='zr_0' width='600' height='400' style='position: absolute; left: 0px; top: 0px; width: 300px; height: 300px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;'></canvas></div><div style='position: absolute; display: none; border-style: solid; white-space: nowrap; z-index: 9999999; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1), top 0.4s cubic-bezier(0.23, 1, 0.32, 1); background-color: rgba(50, 50, 50, 0.7); border-width: 0px; border-color: rgb(51, 51, 51); border-radius: 4px; color: rgb(255, 255, 255); font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 14px; font-family: &quot;Microsoft YaHei&quot;; line-height: 21px; padding: 5px; left: 433px; top: 322px;'>销量<br><span style='display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:#c23531;'></span>高跟鞋: 10</div></div>")
-        var code = $(this).children().children().attr("cloudcode");
-        console.log(code)
+        code = $(this).children().children().attr("cloudcode");
+        console.log(code);
         var data ="cloudcode="+code;
-        $.ajax({
+        /*$.ajax({
             type: "post",
             //contentType:"application/json;charset=utf-8",
             url: "http://localhost:8080/cloud/getresult",
             dataType: "json",
             data:data,
             success: function (data) {
-                console.log(data)
+                console.log(data);
                 var iden = Object.getOwnPropertyNames(data[0]);
-                console.log(iden)
+                //console.log(iden)
                 for (var i = 0; i < data.length; i++) {
                     var name = Object.getOwnPropertyNames(data[i]);
                     var value = data[i][name];
-                    //console.log(name)
-                    //console.log(value)
-                    idenData.push({name: name, value: value})
-                    //console.log(idenData)
+                    //console.log(name);
+                    //console.log("----name");
+                    //console.log(value);
+                    //console.log("-----value");
+                    //idenData.push({name: name, value: value});
+                    //console.log(idenData);
+                    //console.log("-----idenData")
                 }
-                data.forEach(function (item) {
-                    for (var key in item) {
-
-                    }
-                });
             },
             error: function (e) {
                 console.log(e);
             }
-        });
+        });*/
     })
 }
 function draw_map() {

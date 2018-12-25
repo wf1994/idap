@@ -15,259 +15,34 @@ $(document).ready(function (){
     var chart = document.getElementById("main");
     var initChart = echarts.init(chart);
     draw_circle();
+    getData();
 })
 $(".thumbnail").on("click", function () {
+    getData();
     var id = $(this).prop("id");
     eval(id + "()");
     $("#table_head").text($(this).attr("name"));  //show_xx_table()函数体中使用
-    getData();
 })
 
-function remove_table() {
-    $("table").remove();
-}
-function show_relationship_table(name) {
-    //alert(name);
 
-    $("table").remove();
-    $.getJSON('data/test2.json', function (data) {
-
-        for (var i = 0; i < data.length; i++) {
-            if (data[i].name === name) {
-                //alert(data[i].北斗终端接入数);
-
-                alert(data[i].name);
-
-                var $test = $("<table class=\"table table-hover\" style=\"color: white\">\n" +
-                    "                <thead>\n" +
-                    "                <tr>\n" +
-                    "                    <td id=\"table_head\">" + data[i].name + "</td>\n" +
-                    "                </tr>\n" +
-                    "                </thead>\n" +
-                    "                <tbody>\n" +
-                    "                 <tr>\n" +
-                    "                    <td>北斗终端接入数</td>\n" +
-                    "                    <td>" + data[i].北斗终端接入数 + "</td>\n" +
-                    "                </tr>\n" +
-                    "                <tr>\n" +
-                    "                    <td>GPS终端接入数</td>\n" +
-                    "                    <td>" + data[i].GPS终端接入数 + "</td>\n" +
-                    "                </tr>\n" +
-                    "                <tr>\n" +
-                    "                    <td>固定终端接入数</td>\n" +
-                    "                    <td>" + data[i].固定终端接入数 + "</td>\n" +
-                    "                </tr>\n" +
-                    "                <tr>\n" +
-                    "                    <td>物联网网关部署数量</td>\n" +
-                    "                    <td>" + data[i].物联网网关部署数量 + "</td>\n" +
-                    "                </tr>\n" +
-                    "                <tr>\n" +
-                    "                    <td>前置服务器部署数量</td>\n" +
-                    "                    <td>" + data[i].前置服务器部署数量 + "</td>\n" +
-                    "                </tr>\n" +
-                    "                <tr>\n" +
-                    "                    <td>注册物联网数据用户数</td>\n" +
-                    "                    <td>" + data[i].注册物联网数据用户数 + "</td>\n" +
-                    "                </tr>\n" +
-                    "                <tr>\n" +
-                    "                    <td>数据标准化指数</td>\n" +
-                    "                    <td>" + data[i].数据标准化指数 + "</td>\n" +
-                    "                </tr>\n" +
-                    "                </tbody>\n" +
-                    "\n" +
-                    "            </table>");
-                $("#table_data").append($test)
-            }
-        }
-    });
-}
-function show_map_table(name) {
-
-
-    $("table").remove();
-    $.getJSON('/test.json', function (data) {
-
-        for (var i = 0; i < data.length; i++) {
-            if (data[i].name === name) {
-                alert(data[i].北斗终端接入数);
-
-                var $test = $("<table class=\"table table-hover\" style=\"color: white\">\n" +
-                    "                <thead>\n" +
-                    "                <tr>\n" +
-                    "                    <td id=\"table_head\">" + name + "物联网发展水平测评</td>\n" +
-                    "                </tr>\n" +
-                    "                </thead>\n" +
-                    "                <tbody>\n" +
-                    "                <tr>\n" +
-                    "                    <td>北斗终端接入数</td>\n" +
-                    "                    <td>" + data[i].北斗终端接入数 + "</td>\n" +
-                    "                </tr>\n" +
-                    "                <tr>\n" +
-                    "                    <td>GPS终端接入数</td>\n" +
-                    "                    <td>" + data[i].GPS终端接入数 + "</td>\n" +
-                    "                </tr>\n" +
-                    "                <tr>\n" +
-                    "                    <td>固定终端接入数</td>\n" +
-                    "                    <td>" + data[i].固定终端接入数 + "</td>\n" +
-                    "                </tr>\n" +
-                    "                <tr>\n" +
-                    "                    <td>物联网网关部署数量</td>\n" +
-                    "                    <td>" + data[i].物联网网关部署数量 + "</td>\n" +
-                    "                </tr>\n" +
-                    "                <tr>\n" +
-                    "                    <td>前置服务器部署数量</td>\n" +
-                    "                    <td>" + data[i].前置服务器部署数量 + "</td>\n" +
-                    "                </tr>\n" +
-                    "                <tr>\n" +
-                    "                    <td>注册物联网数据用户数</td>\n" +
-                    "                    <td>" + data[i].注册物联网数据用户数 + "</td>\n" +
-                    "                </tr>\n" +
-                    "                <tr>\n" +
-                    "                    <td>数据标准化指数</td>\n" +
-                    "                    <td>" + data[i].数据标准化指数 + "</td>\n" +
-                    "                </tr>\n" +
-                    "                </tbody>\n" +
-                    "\n" +
-                    "            </table>");
-                $("#table_data").append($test)
-            }
-        }
-    });
-
-
-}
-function show_force_table(name) {
-    //alert(name);
-
-    $("table").remove();
-    $.getJSON('data/force.json', function (data) {
-
-        for (var i = 0; i < data.length; i++) {
-            if (data[i].name === name) {
-                //alert(data[i].北斗终端接入数);
-
-                //alert(data[i].name);
-
-                var $test = $("<table class=\"table table-hover\" style=\"color: white\">\n" +
-                    "                <thead>\n" +
-                    "                <tr>\n" +
-                    "                    <td id=\"table_head\">" + data[i].paraname + "</td>\n" +
-                    "                </tr>\n" +
-                    "                </thead>\n" +
-                    "                <tbody>\n" +
-                    "                <tr>\n" +
-                    "                    <td>系统</td>\n" +
-                    "                    <td>" + data[i].name + "</td>\n" +
-                    "                </tr>\n" +
-                    "                <tr>\n" +
-                    "                    <td>接口名称</td>\n" +
-                    "                    <td>" + data[i].interfacename + "</td>\n" +
-                    "                </tr>\n" +
-                    "                <tr>\n" +
-                    "                    <td>数据协议</td>\n" +
-                    "                    <td>" + data[i].protocol + "</td>\n" +
-                    "                </tr>\n" +
-                    "                </tbody>\n" +
-                    "\n" +
-                    "            </table>");
-                $("#table_data").append($test)
-            }
-        }
-    });
-
-
-}
-function show_bubble_table(name) {
-    alert(name);
-    $("table").remove();
-    $.getJSON('data/bubble.json', function (data) {
-
-        for (var i = 0; i < data.length; i++) {
-            if (data[i].name === name) {
-                var $test = $("<table class=\"table table-hover\" style=\"color: white\">\n" +
-                    "                <thead>\n" +
-                    "                <tr>\n" +
-                    "                    <td id=\"table_head\">" + data[i].name + "</td>\n" +
-                    "                </tr>\n" +
-                    "                </thead>\n" +
-                    "                <tbody>\n" +
-                    "                <tr>\n" +
-                    "                    <td>当月客户意见反馈数</td>\n" +
-                    "                    <td>" + data[i].当月客户意见反馈数 + "</td>\n" +
-                    "                </tr>\n" +
-                    "                <tr>\n" +
-                    "                    <td>当月客户投诉率</td>\n" +
-                    "                    <td>" + data[i].当月客户投诉率 + "</td>\n" +
-                    "                </tr>\n" +
-                    "                </tbody>\n" +
-                    "\n" +
-                    "            </table>");
-                $("#table_data").append($test)
-            }
-        }
-    });
-
-
-}
-function show_map_table2() {
-
-    $("button").remove();
-    $("table").remove();
-    $.getJSON('data/test.json', function (data) {
-
-        var i = 1;
-
-
-        var $test = $("<table class=\"table table-hover\" style=\"color: white\">\n" +
-            "                <thead>\n" +
-            "                <tr>\n" +
-            "                    <td id=\"table_head\">" + name + "物联网发展水平测评</td>\n" +
-            "                </tr>\n" +
-            "                </thead>\n" +
-            "                <tbody>\n" +
-            "                <tr>\n" +
-            "                    <td>北斗终端接入数</td>\n" +
-            "                    <td>" + data[i].北斗终端接入数 + "</td>\n" +
-            "                </tr>\n" +
-            "                <tr>\n" +
-            "                    <td>GPS终端接入数</td>\n" +
-            "                    <td>" + data[i].GPS终端接入数 + "</td>\n" +
-            "                </tr>\n" +
-            "                <tr>\n" +
-            "                    <td>固定终端接入数</td>\n" +
-            "                    <td>" + data[i].固定终端接入数 + "</td>\n" +
-            "                </tr>\n" +
-            "                <tr>\n" +
-            "                    <td>物联网网关部署数量</td>\n" +
-            "                    <td>" + data[i].物联网网关部署数量 + "</td>\n" +
-            "                </tr>\n" +
-            "                <tr>\n" +
-            "                    <td>前置服务器部署数量</td>\n" +
-            "                    <td>" + data[i].前置服务器部署数量 + "</td>\n" +
-            "                </tr>\n" +
-            "                <tr>\n" +
-            "                    <td>注册物联网数据用户数</td>\n" +
-            "                    <td>" + data[i].注册物联网数据用户数 + "</td>\n" +
-            "                </tr>\n" +
-            "                <tr>\n" +
-            "                    <td>数据标准化指数</td>\n" +
-            "                    <td>" + data[i].数据标准化指数 + "</td>\n" +
-            "                </tr>\n" +
-            "                </tbody>\n" +
-            "\n" +
-            "            </table>");
-        $("#table_data").append($test)
-
-    });
-
-
-}
 
 
 //右上角用户数
 function func_11() {
-
-
+    $.ajax({
+        type:"post",
+        //contentType:"application/json;charset=utf-8",
+        url:"http://localhost:8080/cloud/getyeardata",
+        dataType:"json",
+        data:{cloudcode:code,indexcode:10},
+        success:function(yeardata){
+            console.log(yeardata);
+            console.log("func11 连接成功")
+        },
+        error:function(e){
+            console.log(e);
+        }
+    });
     var myChart = echarts.init(document.getElementById('cont_main'));
 
     option = {
@@ -693,411 +468,47 @@ function func_14() {
 
 
 //draw_circle函数中7个云的右侧table
-function func1() {
+function show_table() {
 
     $("table").remove();
     $("button").remove();
-
-    var test = "<button onclick=\"func_11()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Tooltip on left\">用户数</button>\n" +
-        "\n" +
-        "<button onclick=\"func_12()\"  type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Tooltip on top\">终端数</button>\n" +
-        "\n" +
-        "<button onclick=\"func_13()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Tooltip on bottom\">故障率</button>\n" +
-        "\n" +
-        "<button onclick=\"func_14()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Tooltip on right\">投诉率</button>\n" +
-        "<table class=\"table table-hover\" style=\"color: white;height: 250px\">\n";
-        for (var i = 0; i < idenData.length;i++){
-       test+= "    <tr>\n" +
-        "        <td></td>\n" +
-        "        <td></td>\n" +
+            //创建表单
+            var $test = $("<button onclick=\"func_11()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Tooltip on left\">用户数</button>\n" +
+                "\n" +
+                "<button onclick=\"func_12()\"  type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Tooltip on top\">终端数</button>\n" +
+                "\n" +
+                "<button onclick=\"func_13()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Tooltip on bottom\">故障率</button>\n" +
+                "\n" +
+                "<button onclick=\"func_14()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Tooltip on right\">投诉率</button>\n" +
+                 ""   );
+            var table = document.createElement("table");
+            var tbody = document.createElement("tbody");
+            $(table).append(tbody);
+            $("#table_data").append($test,table);
+            for(var i=0; i<idenData.length;i++){
+                tbody.insertRow(i);
+                tbody.rows[i].insertCell(0);
+                tbody.rows[i].insertCell(1);
+                var name=idenData[i].name;
+                var value= idenData[i].value;
+                tbody.rows[i].cells[0].appendChild(document.createTextNode(name));
+                tbody.rows[i].cells[1].appendChild(document.createTextNode(value));
+            }
+}
+/*//画表格
+"   <table class=\"table table-hover \" style=\"color: white;width:250px;height: 250px\">\n";
+for (var i = 0; i < idenData.length;i++){
+    test+= "    <tr>\n" +
+        "        <td>\n"+idenData[i].name+"</td>\n" +
+        "        <td>\n"+idenData[i].value+"</td>\n" +
         "    </tr>\n";
-        }
-       test+= "</table>";
-
-    /*//create thead
-    var table = document.createElement("table");
-    table.className = "table_ajax";
-    var thead = document.createElement("thead");
-    var thead_tr = document.createElement("tr");
-    var thead_td = document.createElement("td");
-    thead_td.id = "table_head";
-    var thead_td_text = cloudData[0].A001;
-    document.createTextNode(thead_td_text);
-    $(thead_td).append(thead_td_text);
-    $(thead_tr).append(thead_td);
-    $(thead).append(thead_tr);
-    $(table).append(thead);
-    //create tbody
-
-    var tbody = document.createElement("tbody");
-    var text = cloudData[0].A001;
-    $(tbody).append(document.createElement("tr"));
-    $(tbody.childNodes[0]).append(document.createElement("td"));
-    $(tbody.td).append(document.createTextNode(text));
-   /!* for (var i = 0;i<cloudData.length;i++){
-        var text  =  eval(cloudData.A00[i+1]);
-        alert(cloudData[i]);
-        $(tbody).append(document.createElement("tr"));
-        $(tbody.childNodes[i]).append(document.createElement("td"));
-        $(tbody.childNodes.td).append(document.createTextNode("text"));
-    }*!/*/
-    $("#table_data").append(test);
-
 }
-function func2() {
-
-    $("table").remove();
-    $("button").remove();
-    var $test = $("<button onclick=\"func_11()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Tooltip on left\">用户数</button>\n" +
-        "\n" +
-        "<button onclick=\"func_12()\"  type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Tooltip on top\">终端数</button>\n" +
-        "\n" +
-        "<button onclick=\"func_13()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Tooltip on bottom\">故障率</button>\n" +
-        "\n" +
-        "<button onclick=\"func_14()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Tooltip on right\">投诉率</button>\n" +
-        "<table class=\"table table-hover\" style=\"color: white;height: 250px\">\n" +
-        "    <thead>\n" +
-        "    <tr>\n" +
-        "        <td id=\\\"table_head\\\"></td>\n" +
-        "    </tr>\n" +
-        "    </thead>\n" +
-        "    <tbody>\n" +
-        "    <tr>\n" +
-        "        <td>注册客户数</td>\n" +
-        "        <td>2</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>用户访问总人次</td>\n" +
-        "        <td>1234005</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>单日用户访问人次</td>\n" +
-        "        <td>123</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>北斗终端接入数</td>\n" +
-        "        <td>1990</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>可用性指标</td>\n" +
-        "        <td>98.90%</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>平均故障间隔时间（MTBF）</td>\n" +
-        "        <td>1200小时</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>平均故障修复时间(MTTR)</td>\n" +
-        "        <td>0.9小时</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>当月客户意见反馈数</td>\n" +
-        "        <td>12</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>当月客户投诉率</td>\n" +
-        "        <td>1%</td>\n" +
-        "    </tr>\n" +
-        "    </tbody>\n" +
-        "</table>");
-    $("#table_data").append($test);
-
-}
-function func3() {
-
-    $("table").remove();
-    $("button").remove();
-    var $test = $("<button onclick=\"func_11()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Tooltip on left\">用户数</button>\n" +
-        "\n" +
-        "<button onclick=\"func_12()\"  type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Tooltip on top\">终端数</button>\n" +
-        "\n" +
-        "<button onclick=\"func_13()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Tooltip on bottom\">故障率</button>\n" +
-        "\n" +
-        "<button onclick=\"func_14()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Tooltip on right\">投诉率</button>\n" +
-        "<table class=\"table table-hover\" style=\"color: white;height: 250px\">\n" +
-        "    <thead>\n" +
-        "    <tr>\n" +
-        "        <td id=\\\"table_head\\\"></td>\n" +
-        "    </tr>\n" +
-        "    </thead>\n" +
-        "    <tbody>\n" +
-        "    <tr>\n" +
-        "        <td>注册客户数</td>\n" +
-        "        <td>3</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>用户访问总人次</td>\n" +
-        "        <td>12783</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>单日用户访问人次</td>\n" +
-        "        <td>109</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>北斗终端接入数</td>\n" +
-        "        <td>1342</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>可用性指标</td>\n" +
-        "        <td>98.80%</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>平均故障间隔时间（MTBF）</td>\n" +
-        "        <td>1200小时</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>平均故障修复时间(MTTR)</td>\n" +
-        "        <td>0.7小时</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>当月客户意见反馈数</td>\n" +
-        "        <td>5</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>当月客户投诉率</td>\n" +
-        "        <td>0%</td>\n" +
-        "    </tr>\n" +
-        "    </tbody>\n" +
-        "</table>");
-    $("#table_data").append($test);
-
-}
-function func4() {
-
-    $("table").remove();
-    $("button").remove();
-    var $test = $("<button onclick=\"func_11()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Tooltip on left\">用户数</button>\n" +
-        "\n" +
-        "<button onclick=\"func_12()\"  type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Tooltip on top\">终端数</button>\n" +
-        "\n" +
-        "<button onclick=\"func_13()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Tooltip on bottom\">故障率</button>\n" +
-        "\n" +
-        "<button onclick=\"func_14()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Tooltip on right\">投诉率</button>\n" +
-        "<table class=\"table table-hover\" style=\"color: white;height: 250px\">\n" +
-        "    <thead>\n" +
-        "    <tr>\n" +
-        "        <td id=\\\"table_head\\\"></td>\n" +
-        "    </tr>\n" +
-        "    </thead>\n" +
-        "    <tbody>\n" +
-        "    <tr>\n" +
-        "        <td>注册客户数</td>\n" +
-        "        <td>4</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>用户访问总人次</td>\n" +
-        "        <td>180345</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>单日用户访问人次</td>\n" +
-        "        <td>210</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>北斗终端接入数</td>\n" +
-        "        <td>3190</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>可用性指标</td>\n" +
-        "        <td>99.10%</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>平均故障间隔时间（MTBF）</td>\n" +
-        "        <td>1290小时</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>平均故障修复时间(MTTR)</td>\n" +
-        "        <td>0.4小时</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>当月客户意见反馈数</td>\n" +
-        "        <td>11</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>当月客户投诉率</td>\n" +
-        "        <td>0%</td>\n" +
-        "    </tr>\n" +
-        "    </tbody>\n" +
-        "</table>");
-    $("#table_data").append($test);
-
-}
-function func5() {
-
-    $("table").remove();
-    $("button").remove();
-    var $test = $("<button onclick=\"func_11()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Tooltip on left\">用户数</button>\n" +
-        "\n" +
-        "<button onclick=\"func_12()\"  type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Tooltip on top\">终端数</button>\n" +
-        "\n" +
-        "<button onclick=\"func_13()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Tooltip on bottom\">故障率</button>\n" +
-        "\n" +
-        "<button onclick=\"func_14()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Tooltip on right\">投诉率</button>\n" +
-        "<table class=\"table table-hover\" style=\"color: white;height: 250px\">\n" +
-        "    <thead>\n" +
-        "    <tr>\n" +
-        "        <td id=\\\"table_head\\\"></td>\n" +
-        "    </tr>\n" +
-        "    </thead>\n" +
-        "    <tbody>\n" +
-        "    <tr>\n" +
-        "        <td>注册客户数</td>\n" +
-        "        <td>5</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>用户访问总人次</td>\n" +
-        "        <td>16345</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>单日用户访问人次</td>\n" +
-        "        <td>100</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>北斗终端接入数</td>\n" +
-        "        <td>2006</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>可用性指标</td>\n" +
-        "        <td>99.90%</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>平均故障间隔时间（MTBF）</td>\n" +
-        "        <td>1230小时</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>平均故障修复时间(MTTR)</td>\n" +
-        "        <td>0.9小时</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>当月客户意见反馈数</td>\n" +
-        "        <td>8</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>当月客户投诉率</td>\n" +
-        "        <td>0%</td>\n" +
-        "    </tr>\n" +
-        "    </tbody>\n" +
-        "</table>");
-    $("#table_data").append($test);
-
-}
-function func6() {
-
-    $("table").remove();
-    $("button").remove();
-    var $test = $("<button onclick=\"func_11()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Tooltip on left\">用户数</button>\n" +
-        "\n" +
-        "<button onclick=\"func_12()\"  type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Tooltip on top\">终端数</button>\n" +
-        "\n" +
-        "<button onclick=\"func_13()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Tooltip on bottom\">故障率</button>\n" +
-        "\n" +
-        "<button onclick=\"func_14()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Tooltip on right\">投诉率</button>\n" +
-        "<table class=\"table table-hover\" style=\"color: white;height: 250px\">\n" +
-        "    <thead>\n" +
-        "    <tr>\n" +
-        "        <td id=\\\"table_head\\\"></td>\n" +
-        "    </tr>\n" +
-        "    </thead>\n" +
-        "    <tbody>\n" +
-        "    <tr>\n" +
-        "        <td>注册客户数</td>\n" +
-        "        <td>6</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>用户访问总人次</td>\n" +
-        "        <td>12345</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>单日用户访问人次</td>\n" +
-        "        <td>99</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>北斗终端接入数</td>\n" +
-        "        <td>1269</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>可用性指标</td>\n" +
-        "        <td>98.90%</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>平均故障间隔时间（MTBF）</td>\n" +
-        "        <td>1200小时</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>平均故障修复时间(MTTR)</td>\n" +
-        "        <td>0.7小时</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>当月客户意见反馈数</td>\n" +
-        "        <td>1</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>当月客户投诉率</td>\n" +
-        "        <td>0%</td>\n" +
-        "    </tr>\n" +
-        "    </tbody>\n" +
-        "</table>");
-    $("#table_data").append($test);
-
-}
-function func7() {
-
-    $("table").remove();
-    $("button").remove();
-    var $test = $("<button onclick=\"func_11()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"left\" title=\"Tooltip on left\">用户数</button>\n" +
-        "\n" +
-        "<button onclick=\"func_12()\"  type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"top\" title=\"Tooltip on top\">终端数</button>\n" +
-        "\n" +
-        "<button onclick=\"func_13()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\"Tooltip on bottom\">故障率</button>\n" +
-        "\n" +
-        "<button onclick=\"func_14()\" type=\"button\" class=\"btn btn-default\" data-toggle=\"tooltip\" data-placement=\"right\" title=\"Tooltip on right\">投诉率</button>\n" +
-        "<table class=\"table table-hover\" style=\"color: white;height: 250px\">\n" +
-        "    <thead>\n" +
-        "    <tr>\n" +
-        "        <td id=\\\"table_head\\\"></td>\n" +
-        "    </tr>\n" +
-        "    </thead>\n" +
-        "    <tbody>\n" +
-        "    <tr>\n" +
-        "        <td>注册客户数</td>\n" +
-        "        <td>453</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>用户访问总人次</td>\n" +
-        "        <td>9300</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>单日用户访问人次</td>\n" +
-        "        <td>95</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>北斗终端接入数</td>\n" +
-        "        <td>900</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>可用性指标</td>\n" +
-        "        <td>97.90%</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>平均故障间隔时间（MTBF）</td>\n" +
-        "        <td>1230小时</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>平均故障修复时间(MTTR)</td>\n" +
-        "        <td>0.5小时</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>当月客户意见反馈数</td>\n" +
-        "        <td>1</td>\n" +
-        "    </tr>\n" +
-        "    <tr>\n" +
-        "        <td>当月客户投诉率</td>\n" +
-        "        <td>0%</td>\n" +
-        "    </tr>\n" +
-        "    </tbody>\n" +
-        "</table>");
-    $("#table_data").append($test);
-
-}
+test+= "</table>\n" +
+    "<\div>\n" +
+    "\n" +
+    "<\div>\n";
+$("#table_data").append(test);*/
+//获取云和code
 function getData(){
     alert("已经调用！");
     var data="level=1";
@@ -1134,60 +545,49 @@ function getData(){
         }
     });
 }
-window.onload = getData();
-$("#draw_circle").on(getData);
 function draw_circle() {
     $("#main").html(
-        "<img src='/img/bg.png' style='width:630px;height:630px;margin-left: 30px'  ></body>\n" +
+        "<img src='/img/bg.png' style='width:630px;height:630px;margin-left: 0px'  ></body>\n" +
         "<div id=\"drawing\">\n" +
-        "    <a href=\"javascript:func1()\" class='a_href' >\n" +
-        "        <div class=\"circle1\" style=\"width: 150px;height: 150px;border-radius: 100px;left: 262px;top: -623px;\">\n" +
+        "        <div class=\"circle1 getcode\" style=\"width: 150px;height: 150px;border-radius: 100px;left: 232px;top: -623px;\">\n" +
         "           <div id= \"cname_1\" style=\"font-size:22px;left: 43px; position: absolute; top: 62px;\"></div> \n" +
         "        </div>\n" +
-        "    </a>\n" +
         "\n" +
-        "    <a href=\"javascript:func2()\" class='a_href' >\n" +
-        "        <div class=\"circle2\" style=\"width: 150px;height: 150px;border-radius: 100px;left: 120px;top: -238px;\">\n" +
+        "        <div class=\"circle2 getcode\" style=\"width: 150px;height: 150px;border-radius: 100px;left: 90px;top: -238px;\">\n" +
         "            <div id= \"cname_2\"style=\"font-size:22px;left: 39px; position: absolute; top: 62px;\"></div>\n" +
         "        </div>\n" +
-        "    </a>\n" +
         "\n" +
-        "    <a href=\"javascript:func3()\" class='a_href' >\n" +
-        "        <div class=\"circle3\" style=\"width: 150px;height: 150px;border-radius: 100px;left: 47px;top: -389px;\">\n" +
+        "        <div class=\"circle3 getcode\" style=\"width: 150px;height: 150px;border-radius: 100px;left: 17px;top: -389px;\">\n" +
         "             <div id= \"cname_3\"style=\"font-size:22px;left: 39px; position: absolute; top: 62px;\"></div>\n" +
         "        </div>\n" +
-        "    </a>\n" +
         "\n" +
-        "    <a href=\"javascript:func4()\" class='a_href' >\n" +
-        "        <div class=\"circle4\" style=\"width: 150px;height: 150px;border-radius: 100px;left: 108px;top: -557px;\">\n" +
+        "        <div class=\"circle4 getcode\" style=\"width: 150px;height: 150px;border-radius: 100px;left: 78px;top: -557px;\">\n" +
         "              <div id= \"cname_4\"style=\"font-size:22px;left: 39px; position: absolute; top: 62px;\"></div>\n" +
         "        </div>\n" +
-        "    </a>\n" +
         "\n" +
-        "    <a href=\"javascript:func5()\" class='a_href' >\n" +
-        "        <div class=\"circle5\" style=\"width: 150px;height: 150px;border-radius: 100px;left: 427px;top: -247px;\">\n" +
+        "        <div class=\"circle5 getcode\" style=\"width: 150px;height: 150px;border-radius: 100px;left: 397px;top: -247px;\">\n" +
         "             <div id= \"cname_5\"style=\"font-size:22px;left: 39px; position: absolute; top: 62px;\"></div>\n" +
         "        </div>\n" +
         "    </a>\n" +
         "\n" +
-        "    <a href=\"javascript:func6()\" class='a_href' >\n" +
-        "        <div class=\"circle6\" style=\"width: 150px;height: 150px;border-radius: 100px;left: 418px;top: -567px;\">\n" +
+        "        <div class=\"circle6 getcode\" style=\"width: 150px;height: 150px;border-radius: 100px;left: 388px;top: -567px;\">\n" +
         "              <div id= \"cname_6\"style=\"font-size:22px;left: 39px; position: absolute; top: 62px;\"></div>\n" +
         "        </div>\n" +
-        "    </a>\n" +
         "\n" +
-        "    <a href=\"javascript:func7()\" class='a_href' >\n" +
-        "        <div class=\"circle7\" style=\"width: 150px;height: 150px;border-radius: 100px;left: 491px;top: -403px;\">\n" +
+        "        <div class=\"circle7 getcode\" style=\"width: 150px;height: 150px;border-radius: 100px;left: 461px;top: -403px;\">\n" +
         "             <div id= \"cname_7\"style=\"font-size:22px;left: 39px; position: absolute; top: 62px;\"></div>\n" +
-        "        </div>\n" +
-        "    </a>")
+        "        </div>\n")
     /*$("#main").live("click",function(){
         var imgsrc = $(this).attr("ccode");
         alert(imgsrc);
     });*/
-    $(".a_href").on("click", function () {
-        $("#circle_data").html("<div id='cont_main' style='width: 300px; height: 200px; left: -20px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;'><div style='position: relative; overflow: hidden; width: 300px; height: 200px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;'><canvas data-zr-dom-id='zr_0' width='600' height='400' style='position: absolute; left: 0px; top: 0px; width: 300px; height: 300px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;'></canvas></div><div style='position: absolute; display: none; border-style: solid; white-space: nowrap; z-index: 9999999; transition: left 0.4s cubic-bezier(0.23, 1, 0.32, 1), top 0.4s cubic-bezier(0.23, 1, 0.32, 1); background-color: rgba(50, 50, 50, 0.7); border-width: 0px; border-color: rgb(51, 51, 51); border-radius: 4px; color: rgb(255, 255, 255); font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 14px; font-family: &quot;Microsoft YaHei&quot;; line-height: 21px; padding: 5px; left: 433px; top: 322px;'>销量<br><span style='display:inline-block;margin-right:5px;border-radius:10px;width:10px;height:10px;background-color:#c23531;'></span>高跟鞋: 10</div></div>")
-        var code = $(this).children().children().attr("cloudcode");
+    $(".getcode").on("click", function() {
+        $("#circle_data").html("<div id='cont_main' style='width: 300px; height: 200px; left: -20px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;'>" +
+            "<div style='position: relative; overflow: hidden; width: 300px; height: 200px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;'>" +
+            "<canvas data-zr-dom-id='zr_0' width='600' height='400' style='position: absolute; left: 0px; top: 0px; width: 280px; height: 300px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;'>" +
+            "</canvas>" + "</div>" +
+            "</div>")
+        var code = $(this).children().attr("cloudcode");
         console.log(code)
         var data ="cloudcode="+code;
         $.ajax({
@@ -1197,8 +597,7 @@ function draw_circle() {
             dataType: "json",
             data:data,
             success: function (data) {
-                console.log(data)
-                var iden = Object.getOwnPropertyNames(data[0]);
+                /*var iden = Object.getOwnPropertyNames(data[0]);
                 console.log(iden)
                 for (var i = 0; i < data.length; i++) {
                     var name = Object.getOwnPropertyNames(data[i]);
@@ -1208,11 +607,14 @@ function draw_circle() {
                     idenData.push({name: name, value: value})
                     //console.log(idenData)
                 }
+                console.log(idenData[2].name)*/
+                idenData=[];
                 data.forEach(function (item) {
                     for (var key in item) {
-
+                        idenData.push({name: key, value: item[key]})
                     }
                 });
+                show_table();
             },
             error: function (e) {
                 console.log(e);
@@ -1220,6 +622,247 @@ function draw_circle() {
         });
     })
 }
+//出图
+function remove_table() {
+    $("table").remove();
+}
+function show_relationship_table(name) {
+    //alert(name);
+
+    $("table").remove();
+    $.getJSON('data/test2.json', function (data) {
+
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].name === name) {
+                //alert(data[i].北斗终端接入数);
+
+                alert(data[i].name);
+
+                var $test = $("<table class=\"table table-hover\" style=\"color: white\">\n" +
+                    "                <thead>\n" +
+                    "                <tr>\n" +
+                    "                    <td id=\"table_head\">" + data[i].name + "</td>\n" +
+                    "                </tr>\n" +
+                    "                </thead>\n" +
+                    "                <tbody>\n" +
+                    "                 <tr>\n" +
+                    "                    <td>北斗终端接入数</td>\n" +
+                    "                    <td>" + data[i].北斗终端接入数 + "</td>\n" +
+                    "                </tr>\n" +
+                    "                <tr>\n" +
+                    "                    <td>GPS终端接入数</td>\n" +
+                    "                    <td>" + data[i].GPS终端接入数 + "</td>\n" +
+                    "                </tr>\n" +
+                    "                <tr>\n" +
+                    "                    <td>固定终端接入数</td>\n" +
+                    "                    <td>" + data[i].固定终端接入数 + "</td>\n" +
+                    "                </tr>\n" +
+                    "                <tr>\n" +
+                    "                    <td>物联网网关部署数量</td>\n" +
+                    "                    <td>" + data[i].物联网网关部署数量 + "</td>\n" +
+                    "                </tr>\n" +
+                    "                <tr>\n" +
+                    "                    <td>前置服务器部署数量</td>\n" +
+                    "                    <td>" + data[i].前置服务器部署数量 + "</td>\n" +
+                    "                </tr>\n" +
+                    "                <tr>\n" +
+                    "                    <td>注册物联网数据用户数</td>\n" +
+                    "                    <td>" + data[i].注册物联网数据用户数 + "</td>\n" +
+                    "                </tr>\n" +
+                    "                <tr>\n" +
+                    "                    <td>数据标准化指数</td>\n" +
+                    "                    <td>" + data[i].数据标准化指数 + "</td>\n" +
+                    "                </tr>\n" +
+                    "                </tbody>\n" +
+                    "\n" +
+                    "            </table>");
+                $("#table_data").append($test)
+            }
+        }
+    });
+}
+function show_map_table(name) {
+
+
+    $("table").remove();
+    $.getJSON('/test.json', function (data) {
+
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].name === name) {
+                alert(data[i].北斗终端接入数);
+
+                var $test = $("<table class=\"table table-hover\" style=\"color: white\">\n" +
+                    "                <thead>\n" +
+                    "                <tr>\n" +
+                    "                    <td id=\"table_head\">" + name + "物联网发展水平测评</td>\n" +
+                    "                </tr>\n" +
+                    "                </thead>\n" +
+                    "                <tbody>\n" +
+                    "                <tr>\n" +
+                    "                    <td>北斗终端接入数</td>\n" +
+                    "                    <td>" + data[i].北斗终端接入数 + "</td>\n" +
+                    "                </tr>\n" +
+                    "                <tr>\n" +
+                    "                    <td>GPS终端接入数</td>\n" +
+                    "                    <td>" + data[i].GPS终端接入数 + "</td>\n" +
+                    "                </tr>\n" +
+                    "                <tr>\n" +
+                    "                    <td>固定终端接入数</td>\n" +
+                    "                    <td>" + data[i].固定终端接入数 + "</td>\n" +
+                    "                </tr>\n" +
+                    "                <tr>\n" +
+                    "                    <td>物联网网关部署数量</td>\n" +
+                    "                    <td>" + data[i].物联网网关部署数量 + "</td>\n" +
+                    "                </tr>\n" +
+                    "                <tr>\n" +
+                    "                    <td>前置服务器部署数量</td>\n" +
+                    "                    <td>" + data[i].前置服务器部署数量 + "</td>\n" +
+                    "                </tr>\n" +
+                    "                <tr>\n" +
+                    "                    <td>注册物联网数据用户数</td>\n" +
+                    "                    <td>" + data[i].注册物联网数据用户数 + "</td>\n" +
+                    "                </tr>\n" +
+                    "                <tr>\n" +
+                    "                    <td>数据标准化指数</td>\n" +
+                    "                    <td>" + data[i].数据标准化指数 + "</td>\n" +
+                    "                </tr>\n" +
+                    "                </tbody>\n" +
+                    "\n" +
+                    "            </table>");
+                $("#table_data").append($test)
+            }
+        }
+    });
+
+
+}
+function show_force_table(name) {
+    //alert(name);
+
+    $("table").remove();
+    $.getJSON('data/force.json', function (data) {
+
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].name === name) {
+                //alert(data[i].北斗终端接入数);
+
+                //alert(data[i].name);
+
+                var $test = $("<table class=\"table table-hover\" style=\"color: white\">\n" +
+                    "                <thead>\n" +
+                    "                <tr>\n" +
+                    "                    <td id=\"table_head\">" + data[i].paraname + "</td>\n" +
+                    "                </tr>\n" +
+                    "                </thead>\n" +
+                    "                <tbody>\n" +
+                    "                <tr>\n" +
+                    "                    <td>系统</td>\n" +
+                    "                    <td>" + data[i].name + "</td>\n" +
+                    "                </tr>\n" +
+                    "                <tr>\n" +
+                    "                    <td>接口名称</td>\n" +
+                    "                    <td>" + data[i].interfacename + "</td>\n" +
+                    "                </tr>\n" +
+                    "                <tr>\n" +
+                    "                    <td>数据协议</td>\n" +
+                    "                    <td>" + data[i].protocol + "</td>\n" +
+                    "                </tr>\n" +
+                    "                </tbody>\n" +
+                    "\n" +
+                    "            </table>");
+                $("#table_data").append($test)
+            }
+        }
+    });
+
+
+}
+function show_bubble_table(name) {
+    alert(name);
+    $("table").remove();
+    $.getJSON('data/bubble.json', function (data) {
+
+        for (var i = 0; i < data.length; i++) {
+            if (data[i].name === name) {
+                var $test = $("<table class=\"table table-hover\" style=\"color: white\">\n" +
+                    "                <thead>\n" +
+                    "                <tr>\n" +
+                    "                    <td id=\"table_head\">" + data[i].name + "</td>\n" +
+                    "                </tr>\n" +
+                    "                </thead>\n" +
+                    "                <tbody>\n" +
+                    "                <tr>\n" +
+                    "                    <td>当月客户意见反馈数</td>\n" +
+                    "                    <td>" + data[i].当月客户意见反馈数 + "</td>\n" +
+                    "                </tr>\n" +
+                    "                <tr>\n" +
+                    "                    <td>当月客户投诉率</td>\n" +
+                    "                    <td>" + data[i].当月客户投诉率 + "</td>\n" +
+                    "                </tr>\n" +
+                    "                </tbody>\n" +
+                    "\n" +
+                    "            </table>");
+                $("#table_data").append($test)
+            }
+        }
+    });
+
+
+}
+function show_map_table2() {
+
+    $("button").remove();
+    $("table").remove();
+    $.getJSON('data/test.json', function (data) {
+
+        var i = 1;
+
+
+        var $test = $("<table class=\"table table-hover\" style=\"color: white\">\n" +
+            "                <thead>\n" +
+            "                <tr>\n" +
+            "                    <td id=\"table_head\">" + name + "物联网发展水平测评</td>\n" +
+            "                </tr>\n" +
+            "                </thead>\n" +
+            "                <tbody>\n" +
+            "                <tr>\n" +
+            "                    <td>北斗终端接入数</td>\n" +
+            "                    <td>" + data[i].北斗终端接入数 + "</td>\n" +
+            "                </tr>\n" +
+            "                <tr>\n" +
+            "                    <td>GPS终端接入数</td>\n" +
+            "                    <td>" + data[i].GPS终端接入数 + "</td>\n" +
+            "                </tr>\n" +
+            "                <tr>\n" +
+            "                    <td>固定终端接入数</td>\n" +
+            "                    <td>" + data[i].固定终端接入数 + "</td>\n" +
+            "                </tr>\n" +
+            "                <tr>\n" +
+            "                    <td>物联网网关部署数量</td>\n" +
+            "                    <td>" + data[i].物联网网关部署数量 + "</td>\n" +
+            "                </tr>\n" +
+            "                <tr>\n" +
+            "                    <td>前置服务器部署数量</td>\n" +
+            "                    <td>" + data[i].前置服务器部署数量 + "</td>\n" +
+            "                </tr>\n" +
+            "                <tr>\n" +
+            "                    <td>注册物联网数据用户数</td>\n" +
+            "                    <td>" + data[i].注册物联网数据用户数 + "</td>\n" +
+            "                </tr>\n" +
+            "                <tr>\n" +
+            "                    <td>数据标准化指数</td>\n" +
+            "                    <td>" + data[i].数据标准化指数 + "</td>\n" +
+            "                </tr>\n" +
+            "                </tbody>\n" +
+            "\n" +
+            "            </table>");
+        $("#table_data").append($test)
+
+    });
+
+
+}
+
 function draw_map() {
     $("button").remove();
     $("#circle_data").html("");

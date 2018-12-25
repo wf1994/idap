@@ -46,18 +46,32 @@ function func_11() {
     var myChart = echarts.init(document.getElementById('cont_main'));
 
     option = {
+        color:['#EF7070'],
         xAxis: {
+            axisLabel:{
+                textStyle:{
+                    color:'#ffbf40'
+                }
+            },
             type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            data: ['2016','2017','2018']
         },
         yAxis: {
-            type: 'value'
+            type: 'value',
+            axisLabel:{
+                splitLine:false,
+                textStyle:{
+                    color:'#ffbf40'
+                },
+            }
         },
         series: [{
-            data: [0, 0, 11150, 0, 6000, 8021, 0],
+            barWidth:30,
+            data: [120, 200, 150],
             type: 'bar'
         }]
     };
+
 
     // 指定图表的配置项和数据
 
@@ -521,7 +535,7 @@ function getData(){
         success:function(data){
             for(var i=0;i<data.length;i++){
                 var cname = data[i].cname;
-                var code = data[i].cloudcode;
+                code = data[i].cloudcode;
                 cdata.push({name:cname,value:code})
             }
 
@@ -588,7 +602,7 @@ function draw_circle() {
             "</canvas>" + "</div>" +
             "</div>")
         var code = $(this).children().attr("cloudcode");
-        console.log(code)
+        console.log(code);
         var data ="cloudcode="+code;
         $.ajax({
             type: "post",
@@ -597,6 +611,7 @@ function draw_circle() {
             dataType: "json",
             data:data,
             success: function (data) {
+                console.log(data);
                 /*var iden = Object.getOwnPropertyNames(data[0]);
                 console.log(iden)
                 for (var i = 0; i < data.length; i++) {

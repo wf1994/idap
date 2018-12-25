@@ -59,6 +59,7 @@ function func_11() {
         yAxis: {
             type: 'value',
             axisLabel:{
+                show:false,
                 splitLine:false,
                 textStyle:{
                     color:'#ffbf40'

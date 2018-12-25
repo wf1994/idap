@@ -29,12 +29,13 @@ $(".thumbnail").on("click", function () {
 
 //右上角用户数
 function func_11() {
+    var data ="cloudcode=10&indexcode=A001";
     $.ajax({
         type:"post",
         //contentType:"application/json;charset=utf-8",
         url:"http://localhost:8080/cloud/getyeardata",
         dataType:"json",
-        data:{cloudcode:code,indexcode:10},
+        data:data,
         success:function(yeardata){
             console.log(yeardata);
             console.log("func11 连接成功")
@@ -581,6 +582,7 @@ function draw_circle() {
         var imgsrc = $(this).attr("ccode");
         alert(imgsrc);
     });*/
+    //点击获取code并请求表格数据
     $(".getcode").on("click", function() {
         $("#circle_data").html("<div id='cont_main' style='width: 300px; height: 200px; left: -20px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;'>" +
             "<div style='position: relative; overflow: hidden; width: 300px; height: 200px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;'>" +

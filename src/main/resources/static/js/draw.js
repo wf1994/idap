@@ -23,9 +23,14 @@ $(".thumbnail").on("click", function () {
     eval(id + "()");
     $("#table_head").text($(this).attr("name"));  //show_xx_table()函数体中使用
 })
-
-
-
+//导航
+/*
+$(".cloud").on("click", function () {
+    getData();
+    draw_circle()
+    $("#table_head").text($(this).attr("name"));  //show_xx_table()函数体中使用
+})
+*/
 
 //右上角用户数
 function func_11() {
@@ -530,7 +535,6 @@ function show_table() {
 
 //获取云和code
 function getData(){
-    alert("已经调用！");
     var data="level=1";
     $.ajax({
         type:"post",
@@ -566,7 +570,9 @@ function getData(){
     });
 }
 //获取指标和数据
+//云联邦测评视图
 function draw_circle() {
+    getData();
     $("#main").html(
         "<img src='/img/bg.png' style='width:630px;height:630px;margin-left: 0px'  ></body>\n" +
         "<div id=\"drawing\">\n" +
@@ -652,9 +658,6 @@ function show_relationship_table(name) {
         for (var i = 0; i < data.length; i++) {
             if (data[i].name === name) {
                 //alert(data[i].北斗终端接入数);
-
-                alert(data[i].name);
-
                 var $test = $("<table class=\"table table-hover\" style=\"color: white\">\n" +
                     "                <thead>\n" +
                     "                <tr>\n" +
@@ -706,8 +709,6 @@ function show_map_table(name) {
 
         for (var i = 0; i < data.length; i++) {
             if (data[i].name === name) {
-                alert(data[i].北斗终端接入数);
-
                 var $test = $("<table class=\"table table-hover\" style=\"color: white\">\n" +
                     "                <thead>\n" +
                     "                <tr>\n" +
@@ -754,7 +755,6 @@ function show_map_table(name) {
 
 }
 function show_force_table(name) {
-    //alert(name);
 
     $("table").remove();
     $.getJSON('data/force.json', function (data) {
@@ -795,7 +795,6 @@ function show_force_table(name) {
 
 }
 function show_bubble_table(name) {
-    alert(name);
     $("table").remove();
     $.getJSON('data/bubble.json', function (data) {
 
@@ -880,6 +879,7 @@ function show_map_table2() {
 
 }
 
+//地域发展水平测评图
 function draw_map() {
     $("button").remove();
     $("#circle_data").html("");
@@ -1093,149 +1093,540 @@ function draw_map() {
 
     myChart.setOption(option, true);
 }
-function draw_bubble() {
+//信息交换接口测评图
+function draw_force() {
     $("button").remove();
     $("#circle_data").html("");
     var oldChart = echarts.getInstanceByDom(document.getElementById("main"));
     oldChart.dispose();
     var myChart = echarts.init(document.getElementById('main'));
-    var app = {};
-    option = null;
-    app.title = '气泡图';
-    //[28604,   77,        17096869, 'Australia',   1]
-    // 横坐标，纵坐标，半径大小，名称，所属类别
-    var data = [
-        [[98, 40000, 85, '综合平台', 1], [79, 36000, 79, '东亚糖业', 1], [89, 39800, 91, '博庆糖业', 1], [99, 49000, 89, '农机服务', 1], [69, 45900, 89, '广西糖网', 1], [91, 39999, 89, '智慧泊车', 1], [98, 45678, 98, '南宁车联网', 1], [86, 41900, 92, '无车承运网', 1], [95, 43100, 93, '顺丰速递', 1], [79, 36789, 80, '顺丰大数据', 1]],
-        [[78, 34000, 65, '综合平台', 2], [71, 23000, 49, '东亚糖业', 2], [79, 29800, 76, '博庆糖业', 2], [67, 41700, 79, '农机服务', 2], [45, 23900, 49, '广西糖网', 2], [76, 45399, 69, '智慧泊车', 2], [58, 23678, 38, '南宁车联网', 2], [66, 31900, 72, '无车承运网', 2], [85, 33100, 79, '顺丰速递', 2], [99, 46789, 90, '顺丰大数据', 2]],
-    ];
-
-    option = {
-        textStyle: {
-            color: '#fff'
+    var categories = [];
+    categories[0] = {
+        name: '综合平台'
+    },
+        categories[1] = {
+            name: '东亚糖业'
         },
-
+        categories[2] = {
+            name: '博庆糖业'
+        },
+        categories[3] = {
+            name: '农机服务'
+        },
+        categories[4] = {
+            name: '广西糖网'
+        },
+        categories[5] = {
+            name: '智慧泊车'
+        },
+        categories[6] = {
+            name: '南宁车联网'
+        },
+        categories[7] = {
+            name: '无车承运网'
+        },
+        categories[8] = {
+            name: '顺丰速递'
+        },
+        categories[9] = {
+            name: '顺丰大数据'
+        };
+    //  for  (var  i  =  0;  i  <  10;  i++)  {
+    //          categories[i]  =  {
+    //                  name:  '数据'  +  i
+    //          };
+    //  }
+    /*        graph.nodes.forEach(function  (node)  {
+      node.itemStyle  =  null;
+      node.value  =  node.symbolSize;
+      node.symbolSize  /=  1.5;
+      node.label  =  {
+      normal:  {
+      show:  node.symbolSize  >  30
+      }
+      };
+      node.category  =  node.data;
+      });*/
+    var option = {
         title: {
-            text: '北斗应用服务系统在线评价'
-            ,
+            text: 'Les  Miserables',
+            subtext: 'Default  layout',
+            top: 'bottom',
+            left: 'right'
+        },
+        tooltip: {},
+        legend: [{
             textStyle: {
                 color: '#fff'
-            }
-        },
-        legend: {
-            //selectedMode:false,//取消图例上的点击事件
-            right: 10,
-            data: ['南宁云中心', '桂林云中心'],
-            textStyle: {
-                color: '#fff'
-            }
-
-        },
-        xAxis: {
-            name: '系统可用性',
-            nameLocation: 'middle',
-
-            splitLine: {
-                lineStyle: {
-                    type: 'dashed'
-                }
-            }
-        },
-        yAxis: {
-            name: 'MTBF',
-            nameLocation: 'middle',
-            splitLine: {
-                lineStyle: {
-                    type: 'dashed'
-                }
             },
-            scale: true
-        },
-        series: [{
-            name: '南宁云中心',
-            data: data[0],
-            type: 'scatter',
-            animationDelay: function (idx) {
-                return idx * 200;
-            },
-            symbolSize: function (data) {
-                return data[2];
-            },
-            label: {
-                emphasis: {
-                    show: true,
-                    formatter: function (param) {
-                        return param.data[3];
-                    },
-                    position: 'top'
-                }
-            },
-            itemStyle: {
-                normal: {
-                    shadowBlur: 10,
-                    shadowColor: 'rgba(120, 36, 50, 0.5)',
-                    shadowOffsetY: 5,
-                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
-                        offset: 0,
-                        color: 'rgb(251, 118, 123)'
+            //  selectedMode:  'single',
+            data: categories.map(function (a) {
+                return a.name;
+            })
+        }],
+        animationDuration: 1500,
+        animationEasingUpdate: 'quinticInOut',
+        series: [
+            {
+                name: 'Les  Miserables',
+                type: 'graph',
+                layout: 'none',
+                data: [{
+                    id: 0,
+                    category: 0,
+                    name: '综合平台',
+                    symbolSize: 100.685715,
+                    x: -266.82776, y: 299.6904, z: 0.0,
+                    itemStyle: {
+                        normal: {
+                            borderColor: 'rgb(235,81,72)'
+                        }
+                    }
+                }, {
+                    id: 1,
+                    category: 1,
+                    name: '东亚糖业',
+                    symbolSize: 41.0,
+                    x: 105.93029, y: 260.8120565, z: 0.0,
+                    itemStyle: {
+                        normal: {
+                            borderColor: 'rgb(236,81,72)'
+                        }
+                    }
+                }, {
+                    id: 2,
+                    category: 2,
+                    name: '博庆糖业',
+                    symbolSize: 42.4,
+                    x: -313.42786, y: -289.44803, z: 0.0,
+                    itemStyle: {
+                        normal: {
+                            borderColor: 'rgb(236,81,72)'
+                        }
+                    }
+                }, {
+                    id: 3,
+                    category: 3,
+                    name: '农机服务',
+                    symbolSize: 45.142853,
+                    x: 82.80825, y: -203.1144, z: 0.0,
+                    itemStyle: {
+                        normal: {
+                            borderColor: 'rgb(236,81,72)'
+                        }
+                    }
+                }, {
+                    id: 4,
+                    category: 4,
+                    name: '广西糖网',
+                    symbolSize: 47.88571,
+                    x: -81.46074, y: -204.20204, z: 0.0,
+                    itemStyle: {
+                        normal: {
+                            borderColor: 'rgb(236,81,72)'
+                        }
+                    }
+                }, {
+                    id: 5,
+                    category: 5,
+                    name: '智慧泊车',
+                    symbolSize: 23.2,
+                    x: -385.6842, y: -20.206686, z: 0.0,
+                    itemStyle: {
+                        normal: {
+                            borderColor: 'rgb(236,81,72)'
+                        }
+                    }
+                }, {
+                    id: 6,
+                    category: 6,
+                    name: '南宁车联网',
+                    symbolSize: 61.600006,
+                    x: 387.89572, y: 110.462326, z: 0.0,
+                    itemStyle: {
+                        normal: {
+                            borderColor: 'rgb(236,81,72)'
+                        }
+                    }
+                }, {
+                    id: 7,
+                    category: 7,
+                    name: '无车承运网',
+                    symbolSize: 53.37143,
+                    x: 206.44687, y: -13.805411, z: 0.0,
+                    itemStyle: {
+                        normal: {
+                            borderColor: 'rgb(236,81,72)'
+                        }
+                    }
+                }, {
+                    id: 8,
+                    category: 8,
+                    name: '顺丰速递',
+                    symbolSize: 34.17143,
+                    x: 516.40784, y: 47.242233, z: 0.0,
+                    itemStyle: {
+                        normal: {
+                            borderColor: 'rgb(236,81,72)'
+                        }
+                    }
+                }, {
+                    id: 9,
+                    category: 9,
+                    name: '顺丰大数据',
+                    symbolSize: 28.17143,
+                    x: 402.40784, y: -147.242233, z: 0.0,
+                    itemStyle: {
+                        normal: {
+                            borderColor: 'rgb(236,81,72)'
+                        }
+                    }
+                }],
+                links: [ //edges是其别名代表节点间的关系数据。
+                    {
+                        source: 0,
+                        target: 1
                     }, {
-                        offset: 1,
-                        color: 'rgb(204, 46, 72)'
-                    }])
-                }
-            }
-        }, {
-            name: '桂林云中心',
-            data: data[1],
-            type: 'scatter',
-            animationDelay: function (idx) {
-                return idx * 200;
-            },
-            /*
-             1e1=10     2e1=20
-             1e2=100    2e2=200
-             1e3=1000   2e3=2000
-             */
-            symbolSize: function (data) {
-                return data[2];
-            },
-            label: {
-                emphasis: {
-                    show: true,
-                    formatter: function (param) {
-                        return param.data[3];
-                    },
-                    position: 'top'
-                }
-            },
-            itemStyle: {
-                normal: {
-                    shadowBlur: 10,
-                    shadowColor: 'rgba(25, 100, 150, 0.5)',
-                    shadowOffsetY: 5,
-                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
-                        offset: 0,
-                        color: 'rgb(129, 227, 238)'
+                        source: 0,
+                        target: 2
                     }, {
-                        offset: 1,
-                        color: 'rgb(25, 183, 207)'
-                    }])
+                        source: 0,
+                        target: 3
+                    }, {
+                        source: 0,
+                        target: 4
+                    }, {
+                        source: 0,
+                        target: 5
+                    }, {
+                        source: 0,
+                        target: 6
+                    }, {
+                        source: 0,
+                        target: 7
+                    }, {
+                        source: 0,
+                        target: 8
+                    }, {
+                        source: 0,
+                        target: 9
+                    }, {
+                        source: 1,
+                        target: 3
+                    }, {
+                        source: 1,
+                        target: 4
+                    }, {
+                        source: 2,
+                        target: 3
+                    }, {
+                        source: 2,
+                        target: 4
+                    }, {
+                        source: 5,
+                        target: 6
+                    }, {
+                        source: 5,
+                        target: 8
+                    }, {
+                        source: 7,
+                        target: 6
+                    }, {
+                        source: 8,
+                        target: 9
+                    }],
+                categories: categories,
+                roam: true,
+                label: {
+                    normal: {
+                        position: 'right',
+                        formatter: '{b}'
+                    }
+                },
+                lineStyle: {
+                    normal: {
+                        color: 'source',
+                        curveness: 0.3
+                    }
                 }
-            }
-        }]
+            }]
     };
 
-
-    myChart.on('legendselectchanged', function (param) {
-        var selected = param.selected;
+    myChart.on('click', function (param) {
         var name = param.name;
         //alert(name);
-        show_bubble_table(name);
+        //alert(typeof name);//string类型
+        show_force_table(name);
 
     });
+    myChart.setOption(option, true);
+
+}
+//应用系统分解指标图
+function draw_pie() {
+    $("button").remove();
+    $("#circle_data").html("");
+    var oldChart = echarts.getInstanceByDom(document.getElementById("main"));
+    oldChart.dispose();
+    var myChart = echarts.init(document.getElementById('main'));
+    var option = {
+        title: {
+            text: "",
+            subtext: "",
+            left: "center",
+            textStyle: {
+                color: "#fff",
+                fontSize: 18
+            },
+        },
 
 
+        backgroundColor: new echarts.graphic.RadialGradient(0, 0, 1, [{
+            offset: 0,
+            color: '#111'
+        }, {
+            offset: 1,
+            color: '#111'
+        }]),
+        tooltip: {
+            trigger: 'item',
+            formatter: "{a} <br/>{b}:({d}%)"
+        },
+        series: [{
+            name: '综合服务平台',
+            type: 'pie',
+            selectedMode: 'single',
+            radius: [0, '20%'],
+
+            label: {
+                normal: {
+                    position: 'inner'
+                }
+            },
+            labelLine: {
+                normal: {
+                    show: false
+                }
+            },
+            data: [{
+                value: 100,
+                name: '北斗综合位置服务平台'
+            }]
+        }, {
+            name: '领域',
+            type: 'pie',
+            radius: ['22%', '40%'],
+            label: {
+                normal: {
+                    position: 'inner'
+                }
+            },
+            data: [{
+                value: 50,
+                name: '平台管理勤务'
+            }, {
+                value: 20,
+                name: '智慧糖业'
+            }, {
+                value: 4,
+                name: '领域3'
+            }, {
+                value: 4,
+                name: '领域4'
+            }, {
+                value: 6,
+                name: '领域5'
+            }, {
+                value: 6,
+                name: '领域6'
+            }, {
+                value: 3,
+                name: '领域7'
+            }, {
+                value: 3,
+                name: '领域8'
+            }, {
+                value: 4,
+                name: '领域9'
+            }]
+        }, {
+            name: '系统',
+            type: 'pie',
+            radius: ['42%', '58%'],
+            label: {
+                normal: {
+                    position: 'inner'
+                }
+            },
+            data: [{
+                value: 6,
+                name: '客户服务'
+            }, {
+                value: 8,
+                name: '营运商务'
+            }, {
+                value: 18,
+                name: '运维管理'
+            }, {
+                value: 6,
+                name: '技术支持'
+            }, {
+                value: 6,
+                name: '营运大数据'
+            }, {
+                value: 6,
+                name: '营运大数据'
+            }, {
+                value: 10,
+                name: '应用系统'
+            }, {
+                value: 6,
+                name: '系统2.2'
+            }, {
+                value: 4,
+                name: '系统2.3'
+            }, {
+                value: 30,
+                name: ''
+            }]
+        }, {
+            name: '分系统',
+            type: 'pie',
+            radius: ['60%', '74%'],
+            label: {
+                normal: {
+                    position: 'inner'
+                }
+            },
+            data: [{
+                value: 2,
+                name: '综合信息服务'
+            }, {
+                value: 2,
+                name: '客户服务软件'
+            }, {
+                value: 2,
+                name: '客户社区中心'
+            }, {
+                value: 2,
+                name: '综合信息服务'
+            }, {
+                value: 2,
+                name: '营运商务中心'
+            }, {
+                value: 2,
+                name: '平台项目管理'
+            }, {
+                value: 2,
+                name: '商务社区服务'
+            }, {
+                value: 2,
+                name: '综合信息服务'
+            }, {
+                value: 2,
+                name: 'SDN网络管理'
+            }, {
+                value: 2,
+                name: '网络监控'
+            }, {
+                value: 2,
+                name: '物联网-信息高速公路管理'
+            }, {
+                value: 2,
+                name: '物联网-接入服务器管理'
+            }, {
+                value: 2,
+                name: '云联邦-基础管理'
+            }, {
+                value: 2,
+                name: '云联邦-服务器管理'
+            }, {
+                value: 2,
+                name: '云联邦-服务器配置'
+            }, {
+                value: 2,
+                name: '运维社区服务'
+            }, {
+                value: 2,
+                name: '综合信息服务'
+            }, {
+                value: 2,
+                name: '物联网-应用服务'
+            }, {
+                value: 2,
+                name: '支持社区服务'
+            }, {
+                value: 2,
+                name: '综合信息服务'
+            }, {
+                value: 2,
+                name: '应用服务'
+            }, {
+                value: 2,
+                name: '技术支持社区服务'
+            }, {
+                value: 2,
+                name: '综合信息服务'
+            }, {
+                value: 2,
+                name: '智能分析报告'
+            }, {
+                value: 2,
+                name: '数据共享社区服务'
+            }, {
+                value: 7,
+                name: '糖业精细化服务'
+            }, {
+                value: 3,
+                name: '分系统2.1.2'
+            }, {
+                value: 40,
+                name: ''
+            }]
+        },
+            {
+                name: '终端',
+                type: 'pie',
+                radius: ['76%', '88%'],
+                label: {
+                    normal: {
+                        position: 'outer'
+                    }
+                },
+                data: [{
+                    value: 50,
+                    name: ''
+                }, {
+                    value: 1,
+                    name: 'LoRa网关'
+                }, {
+                    value: 1,
+                    name: 'LoRa采集终端'
+                }, {
+                    value: 1,
+                    name: 'LoRa控制终端'
+                }, {
+                    value: 1,
+                    name: '小型气象站'
+                }, {
+                    value: 1,
+                    name: '北斗手持采集终端'
+                }, {
+                    value: 1,
+                    name: '人员随身定位终端'
+                }, {
+                    value: 1,
+                    name: '车辆调度终端'
+                }, {
+                    value: 43,
+                    name: ''
+                }]
+            }
+        ]
+    };
     myChart.setOption(option, true);
 }
+//应用系统关联图
 function draw_relationship() {
     $("button").remove();
     $("#circle_data").html("");
@@ -1661,536 +2052,152 @@ function draw_relationship() {
     });
     myChart.setOption(option,true);
 }
-function draw_pie() {
+//服务质量测评泡泡图
+function draw_bubble() {
     $("button").remove();
     $("#circle_data").html("");
     var oldChart = echarts.getInstanceByDom(document.getElementById("main"));
     oldChart.dispose();
     var myChart = echarts.init(document.getElementById('main'));
-    var option = {
+    var app = {};
+    option = null;
+    app.title = '气泡图';
+    //[28604,   77,        17096869, 'Australia',   1]
+    // 横坐标，纵坐标，半径大小，名称，所属类别
+    var data = [
+        [[98, 40000, 85, '综合平台', 1], [79, 36000, 79, '东亚糖业', 1], [89, 39800, 91, '博庆糖业', 1], [99, 49000, 89, '农机服务', 1], [69, 45900, 89, '广西糖网', 1], [91, 39999, 89, '智慧泊车', 1], [98, 45678, 98, '南宁车联网', 1], [86, 41900, 92, '无车承运网', 1], [95, 43100, 93, '顺丰速递', 1], [79, 36789, 80, '顺丰大数据', 1]],
+        [[78, 34000, 65, '综合平台', 2], [71, 23000, 49, '东亚糖业', 2], [79, 29800, 76, '博庆糖业', 2], [67, 41700, 79, '农机服务', 2], [45, 23900, 49, '广西糖网', 2], [76, 45399, 69, '智慧泊车', 2], [58, 23678, 38, '南宁车联网', 2], [66, 31900, 72, '无车承运网', 2], [85, 33100, 79, '顺丰速递', 2], [99, 46789, 90, '顺丰大数据', 2]],
+    ];
+
+    option = {
+        textStyle: {
+            color: '#fff'
+        },
+
         title: {
-            text: "",
-            subtext: "",
-            left: "center",
-            textStyle: {
-                color: "#fff",
-                fontSize: 18
-            },
-        },
-
-
-        backgroundColor: new echarts.graphic.RadialGradient(0, 0, 1, [{
-            offset: 0,
-            color: '#111'
-        }, {
-            offset: 1,
-            color: '#111'
-        }]),
-        tooltip: {
-            trigger: 'item',
-            formatter: "{a} <br/>{b}:({d}%)"
-        },
-        series: [{
-            name: '综合服务平台',
-            type: 'pie',
-            selectedMode: 'single',
-            radius: [0, '20%'],
-
-            label: {
-                normal: {
-                    position: 'inner'
-                }
-            },
-            labelLine: {
-                normal: {
-                    show: false
-                }
-            },
-            data: [{
-                value: 100,
-                name: '北斗综合位置服务平台'
-            }]
-        }, {
-            name: '领域',
-            type: 'pie',
-            radius: ['22%', '40%'],
-            label: {
-                normal: {
-                    position: 'inner'
-                }
-            },
-            data: [{
-                value: 50,
-                name: '平台管理勤务'
-            }, {
-                value: 20,
-                name: '智慧糖业'
-            }, {
-                value: 4,
-                name: '领域3'
-            }, {
-                value: 4,
-                name: '领域4'
-            }, {
-                value: 6,
-                name: '领域5'
-            }, {
-                value: 6,
-                name: '领域6'
-            }, {
-                value: 3,
-                name: '领域7'
-            }, {
-                value: 3,
-                name: '领域8'
-            }, {
-                value: 4,
-                name: '领域9'
-            }]
-        }, {
-            name: '系统',
-            type: 'pie',
-            radius: ['42%', '58%'],
-            label: {
-                normal: {
-                    position: 'inner'
-                }
-            },
-            data: [{
-                value: 6,
-                name: '客户服务'
-            }, {
-                value: 8,
-                name: '营运商务'
-            }, {
-                value: 18,
-                name: '运维管理'
-            }, {
-                value: 6,
-                name: '技术支持'
-            }, {
-                value: 6,
-                name: '营运大数据'
-            }, {
-                value: 6,
-                name: '营运大数据'
-            }, {
-                value: 10,
-                name: '应用系统'
-            }, {
-                value: 6,
-                name: '系统2.2'
-            }, {
-                value: 4,
-                name: '系统2.3'
-            }, {
-                value: 30,
-                name: ''
-            }]
-        }, {
-            name: '分系统',
-            type: 'pie',
-            radius: ['60%', '74%'],
-            label: {
-                normal: {
-                    position: 'inner'
-                }
-            },
-            data: [{
-                value: 2,
-                name: '综合信息服务'
-            }, {
-                value: 2,
-                name: '客户服务软件'
-            }, {
-                value: 2,
-                name: '客户社区中心'
-            }, {
-                value: 2,
-                name: '综合信息服务'
-            }, {
-                value: 2,
-                name: '营运商务中心'
-            }, {
-                value: 2,
-                name: '平台项目管理'
-            }, {
-                value: 2,
-                name: '商务社区服务'
-            }, {
-                value: 2,
-                name: '综合信息服务'
-            }, {
-                value: 2,
-                name: 'SDN网络管理'
-            }, {
-                value: 2,
-                name: '网络监控'
-            }, {
-                value: 2,
-                name: '物联网-信息高速公路管理'
-            }, {
-                value: 2,
-                name: '物联网-接入服务器管理'
-            }, {
-                value: 2,
-                name: '云联邦-基础管理'
-            }, {
-                value: 2,
-                name: '云联邦-服务器管理'
-            }, {
-                value: 2,
-                name: '云联邦-服务器配置'
-            }, {
-                value: 2,
-                name: '运维社区服务'
-            }, {
-                value: 2,
-                name: '综合信息服务'
-            }, {
-                value: 2,
-                name: '物联网-应用服务'
-            }, {
-                value: 2,
-                name: '支持社区服务'
-            }, {
-                value: 2,
-                name: '综合信息服务'
-            }, {
-                value: 2,
-                name: '应用服务'
-            }, {
-                value: 2,
-                name: '技术支持社区服务'
-            }, {
-                value: 2,
-                name: '综合信息服务'
-            }, {
-                value: 2,
-                name: '智能分析报告'
-            }, {
-                value: 2,
-                name: '数据共享社区服务'
-            }, {
-                value: 7,
-                name: '糖业精细化服务'
-            }, {
-                value: 3,
-                name: '分系统2.1.2'
-            }, {
-                value: 40,
-                name: ''
-            }]
-        },
-            {
-                name: '终端',
-                type: 'pie',
-                radius: ['76%', '88%'],
-                label: {
-                    normal: {
-                        position: 'outer'
-                    }
-                },
-                data: [{
-                    value: 50,
-                    name: ''
-                }, {
-                    value: 1,
-                    name: 'LoRa网关'
-                }, {
-                    value: 1,
-                    name: 'LoRa采集终端'
-                }, {
-                    value: 1,
-                    name: 'LoRa控制终端'
-                }, {
-                    value: 1,
-                    name: '小型气象站'
-                }, {
-                    value: 1,
-                    name: '北斗手持采集终端'
-                }, {
-                    value: 1,
-                    name: '人员随身定位终端'
-                }, {
-                    value: 1,
-                    name: '车辆调度终端'
-                }, {
-                    value: 43,
-                    name: ''
-                }]
-            }
-        ]
-    };
-    myChart.setOption(option, true);
-}
-function draw_force() {
-    $("button").remove();
-    $("#circle_data").html("");
-    var oldChart = echarts.getInstanceByDom(document.getElementById("main"));
-    oldChart.dispose();
-    var myChart = echarts.init(document.getElementById('main'));
-    var categories = [];
-    categories[0] = {
-        name: '综合平台'
-    },
-        categories[1] = {
-            name: '东亚糖业'
-        },
-        categories[2] = {
-            name: '博庆糖业'
-        },
-        categories[3] = {
-            name: '农机服务'
-        },
-        categories[4] = {
-            name: '广西糖网'
-        },
-        categories[5] = {
-            name: '智慧泊车'
-        },
-        categories[6] = {
-            name: '南宁车联网'
-        },
-        categories[7] = {
-            name: '无车承运网'
-        },
-        categories[8] = {
-            name: '顺丰速递'
-        },
-        categories[9] = {
-            name: '顺丰大数据'
-        };
-    //  for  (var  i  =  0;  i  <  10;  i++)  {
-    //          categories[i]  =  {
-    //                  name:  '数据'  +  i
-    //          };
-    //  }
-    /*        graph.nodes.forEach(function  (node)  {
-      node.itemStyle  =  null;
-      node.value  =  node.symbolSize;
-      node.symbolSize  /=  1.5;
-      node.label  =  {
-      normal:  {
-      show:  node.symbolSize  >  30
-      }
-      };
-      node.category  =  node.data;
-      });*/
-    var option = {
-        title: {
-            text: 'Les  Miserables',
-            subtext: 'Default  layout',
-            top: 'bottom',
-            left: 'right'
-        },
-        tooltip: {},
-        legend: [{
+            text: '北斗应用服务系统在线评价'
+            ,
             textStyle: {
                 color: '#fff'
-            },
-            //  selectedMode:  'single',
-            data: categories.map(function (a) {
-                return a.name;
-            })
-        }],
-        animationDuration: 1500,
-        animationEasingUpdate: 'quinticInOut',
-        series: [
-            {
-                name: 'Les  Miserables',
-                type: 'graph',
-                layout: 'none',
-                data: [{
-                    id: 0,
-                    category: 0,
-                    name: '综合平台',
-                    symbolSize: 100.685715,
-                    x: -266.82776, y: 299.6904, z: 0.0,
-                    itemStyle: {
-                        normal: {
-                            borderColor: 'rgb(235,81,72)'
-                        }
-                    }
-                }, {
-                    id: 1,
-                    category: 1,
-                    name: '东亚糖业',
-                    symbolSize: 41.0,
-                    x: 105.93029, y: 260.8120565, z: 0.0,
-                    itemStyle: {
-                        normal: {
-                            borderColor: 'rgb(236,81,72)'
-                        }
-                    }
-                }, {
-                    id: 2,
-                    category: 2,
-                    name: '博庆糖业',
-                    symbolSize: 42.4,
-                    x: -313.42786, y: -289.44803, z: 0.0,
-                    itemStyle: {
-                        normal: {
-                            borderColor: 'rgb(236,81,72)'
-                        }
-                    }
-                }, {
-                    id: 3,
-                    category: 3,
-                    name: '农机服务',
-                    symbolSize: 45.142853,
-                    x: 82.80825, y: -203.1144, z: 0.0,
-                    itemStyle: {
-                        normal: {
-                            borderColor: 'rgb(236,81,72)'
-                        }
-                    }
-                }, {
-                    id: 4,
-                    category: 4,
-                    name: '广西糖网',
-                    symbolSize: 47.88571,
-                    x: -81.46074, y: -204.20204, z: 0.0,
-                    itemStyle: {
-                        normal: {
-                            borderColor: 'rgb(236,81,72)'
-                        }
-                    }
-                }, {
-                    id: 5,
-                    category: 5,
-                    name: '智慧泊车',
-                    symbolSize: 23.2,
-                    x: -385.6842, y: -20.206686, z: 0.0,
-                    itemStyle: {
-                        normal: {
-                            borderColor: 'rgb(236,81,72)'
-                        }
-                    }
-                }, {
-                    id: 6,
-                    category: 6,
-                    name: '南宁车联网',
-                    symbolSize: 61.600006,
-                    x: 387.89572, y: 110.462326, z: 0.0,
-                    itemStyle: {
-                        normal: {
-                            borderColor: 'rgb(236,81,72)'
-                        }
-                    }
-                }, {
-                    id: 7,
-                    category: 7,
-                    name: '无车承运网',
-                    symbolSize: 53.37143,
-                    x: 206.44687, y: -13.805411, z: 0.0,
-                    itemStyle: {
-                        normal: {
-                            borderColor: 'rgb(236,81,72)'
-                        }
-                    }
-                }, {
-                    id: 8,
-                    category: 8,
-                    name: '顺丰速递',
-                    symbolSize: 34.17143,
-                    x: 516.40784, y: 47.242233, z: 0.0,
-                    itemStyle: {
-                        normal: {
-                            borderColor: 'rgb(236,81,72)'
-                        }
-                    }
-                }, {
-                    id: 9,
-                    category: 9,
-                    name: '顺丰大数据',
-                    symbolSize: 28.17143,
-                    x: 402.40784, y: -147.242233, z: 0.0,
-                    itemStyle: {
-                        normal: {
-                            borderColor: 'rgb(236,81,72)'
-                        }
-                    }
-                }],
-                links: [ //edges是其别名代表节点间的关系数据。
-                    {
-                        source: 0,
-                        target: 1
-                    }, {
-                        source: 0,
-                        target: 2
-                    }, {
-                        source: 0,
-                        target: 3
-                    }, {
-                        source: 0,
-                        target: 4
-                    }, {
-                        source: 0,
-                        target: 5
-                    }, {
-                        source: 0,
-                        target: 6
-                    }, {
-                        source: 0,
-                        target: 7
-                    }, {
-                        source: 0,
-                        target: 8
-                    }, {
-                        source: 0,
-                        target: 9
-                    }, {
-                        source: 1,
-                        target: 3
-                    }, {
-                        source: 1,
-                        target: 4
-                    }, {
-                        source: 2,
-                        target: 3
-                    }, {
-                        source: 2,
-                        target: 4
-                    }, {
-                        source: 5,
-                        target: 6
-                    }, {
-                        source: 5,
-                        target: 8
-                    }, {
-                        source: 7,
-                        target: 6
-                    }, {
-                        source: 8,
-                        target: 9
-                    }],
-                categories: categories,
-                roam: true,
-                label: {
-                    normal: {
-                        position: 'right',
-                        formatter: '{b}'
-                    }
-                },
+            }
+        },
+        legend: {
+            //selectedMode:false,//取消图例上的点击事件
+            right: 10,
+            data: ['南宁云中心', '桂林云中心'],
+            textStyle: {
+                color: '#fff'
+            }
+
+        },
+        xAxis: {
+            name: '系统可用性',
+            nameLocation: 'middle',
+
+            splitLine: {
                 lineStyle: {
-                    normal: {
-                        color: 'source',
-                        curveness: 0.3
-                    }
+                    type: 'dashed'
                 }
-            }]
+            }
+        },
+        yAxis: {
+            name: 'MTBF',
+            nameLocation: 'middle',
+            splitLine: {
+                lineStyle: {
+                    type: 'dashed'
+                }
+            },
+            scale: true
+        },
+        series: [{
+            name: '南宁云中心',
+            data: data[0],
+            type: 'scatter',
+            animationDelay: function (idx) {
+                return idx * 200;
+            },
+            symbolSize: function (data) {
+                return data[2];
+            },
+            label: {
+                emphasis: {
+                    show: true,
+                    formatter: function (param) {
+                        return param.data[3];
+                    },
+                    position: 'top'
+                }
+            },
+            itemStyle: {
+                normal: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(120, 36, 50, 0.5)',
+                    shadowOffsetY: 5,
+                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                        offset: 0,
+                        color: 'rgb(251, 118, 123)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(204, 46, 72)'
+                    }])
+                }
+            }
+        }, {
+            name: '桂林云中心',
+            data: data[1],
+            type: 'scatter',
+            animationDelay: function (idx) {
+                return idx * 200;
+            },
+            /*
+             1e1=10     2e1=20
+             1e2=100    2e2=200
+             1e3=1000   2e3=2000
+             */
+            symbolSize: function (data) {
+                return data[2];
+            },
+            label: {
+                emphasis: {
+                    show: true,
+                    formatter: function (param) {
+                        return param.data[3];
+                    },
+                    position: 'top'
+                }
+            },
+            itemStyle: {
+                normal: {
+                    shadowBlur: 10,
+                    shadowColor: 'rgba(25, 100, 150, 0.5)',
+                    shadowOffsetY: 5,
+                    color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+                        offset: 0,
+                        color: 'rgb(129, 227, 238)'
+                    }, {
+                        offset: 1,
+                        color: 'rgb(25, 183, 207)'
+                    }])
+                }
+            }
+        }]
     };
 
-    myChart.on('click', function (param) {
+
+    myChart.on('legendselectchanged', function (param) {
+        var selected = param.selected;
         var name = param.name;
         //alert(name);
-        //alert(typeof name);//string类型
-        show_force_table(name);
+        show_bubble_table(name);
 
     });
-    myChart.setOption(option, true);
 
+
+    myChart.setOption(option, true);
 }
+
+
+
 
 

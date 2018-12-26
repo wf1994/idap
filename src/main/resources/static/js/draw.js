@@ -565,6 +565,7 @@ function getData(){
         }
     });
 }
+//获取指标和数据
 function draw_circle() {
     $("#main").html(
         "<img src='/img/bg.png' style='width:630px;height:630px;margin-left: 0px'  ></body>\n" +
@@ -602,8 +603,10 @@ function draw_circle() {
         alert(imgsrc);
     });*/
     //点击获取code并请求表格数据
+    //云点击事件
     $(".getcode").on("click", function() {
-        $("#circle_data").html("<div id='cont_main' style='width: 325px; height: 200px; left: -20px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;'>" +
+        $("#circle_data").html(
+            "<div id='cont_main' " + "style='width: 300px; height: 200px; left: -20px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;'>" +
             "<div style='position: relative; overflow: hidden; width: 300px; height: 200px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;'>" +
             "<canvas data-zr-dom-id='zr_0' width='600' height='400' style='position: absolute; left: 0px; top: 0px; width: 280px; height: 300px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;'>" +
             "</canvas>" + "</div>" +
@@ -618,18 +621,7 @@ function draw_circle() {
             dataType: "json",
             data:data,
             success: function (data) {
-                console.log(data);
-                /*var iden = Object.getOwnPropertyNames(data[0]);
-                console.log(iden)
-                for (var i = 0; i < data.length; i++) {
-                    var name = Object.getOwnPropertyNames(data[i]);
-                    var value = data[i][name];
-                    //console.log(name)
-                    //console.log(value)
-                    idenData.push({name: name, value: value})
-                    //console.log(idenData)
-                }
-                console.log(idenData[2].name)*/
+                console.log(data)
                 idenData=[];
                 data.forEach(function (item) {
                     for (var key in item) {
@@ -648,6 +640,9 @@ function draw_circle() {
 function remove_table() {
     $("table").remove();
 }
+
+
+//-------------------------------------------------------------------------------------------------------
 function show_relationship_table(name) {
     //alert(name);
 

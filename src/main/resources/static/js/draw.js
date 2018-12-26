@@ -29,39 +29,56 @@ $(".thumbnail").on("click", function () {
 
 //右上角用户数
 function func_11() {
+    var names = [];//x轴坐标值
+    var nums =[]; //y轴value
+    var myChart = echarts.init(document.getElementById('cont_main'));
+    var data ="cloudcode=10&indexcode=A001";
     $.ajax({
         type:"post",
         //contentType:"application/json;charset=utf-8",
         url:"http://localhost:8080/cloud/getyeardata",
         dataType:"json",
-        data:{cloudcode:code,indexcode:10},
+        data:data,
         success:function(yeardata){
+            myChart.clear();
             console.log(yeardata);
+            for(var i=0;i<yeardata.length;i++){
+                names.unshift(yeardata[i].year);
+                nums.unshift(yeardata[i].data);
+            }
+            myChart.setOption({
+                color:['#EF7070'],
+                xAxis: {
+                    axisLabel:{
+                        textStyle:{
+                            color:'#ffbf40'
+                        }
+                    },
+                    type: 'category',
+                    data: names
+                },
+                yAxis: {
+                    type: 'value',
+                    axisLabel:{
+                        show:false,
+                        splitLine:false,
+                        textStyle:{
+                            color:'#ffbf40'
+                        },
+                    }
+                },
+                series: [{
+                    barWidth:30,
+                    data: nums,
+                    type: 'bar'
+                }]
+            });
             console.log("func11 连接成功")
         },
         error:function(e){
             console.log(e);
         }
     });
-    var myChart = echarts.init(document.getElementById('cont_main'));
-
-    option = {
-        xAxis: {
-            type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-        },
-        yAxis: {
-            type: 'value'
-        },
-        series: [{
-            data: [0, 0, 11150, 0, 6000, 8021, 0],
-            type: 'bar'
-        }]
-    };
-
-    // 指定图表的配置项和数据
-
-    myChart.setOption(option, true);
 }
 //右上角终端数
 function func_12() {
@@ -70,18 +87,33 @@ function func_12() {
     var myChart = echarts.init(document.getElementById('cont_main'));
 
     option = {
+        color:['#EF7070'],
         xAxis: {
+            axisLabel:{
+                textStyle:{
+                    color:'#ffbf40'
+                }
+            },
             type: 'category',
-            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+            data: ['2016','2017','2018']
         },
         yAxis: {
-            type: 'value'
+            type: 'value',
+            axisLabel:{
+                show:false,
+                splitLine:false,
+                textStyle:{
+                    color:'#ffbf40'
+                },
+            }
         },
         series: [{
-            data: [0, 1110, 11150, 5000, 330, 0, 0],
+            barWidth:30,
+            data: [5652, 52200, 154620],
             type: 'bar'
         }]
     };
+
 
     // 指定图表的配置项和数据
 
@@ -495,19 +527,7 @@ function show_table() {
                 tbody.rows[i].cells[1].appendChild(document.createTextNode(value));
             }
 }
-/*//画表格
-"   <table class=\"table table-hover \" style=\"color: white;width:250px;height: 250px\">\n";
-for (var i = 0; i < idenData.length;i++){
-    test+= "    <tr>\n" +
-        "        <td>\n"+idenData[i].name+"</td>\n" +
-        "        <td>\n"+idenData[i].value+"</td>\n" +
-        "    </tr>\n";
-}
-test+= "</table>\n" +
-    "<\div>\n" +
-    "\n" +
-    "<\div>\n";
-$("#table_data").append(test);*/
+
 //获取云和code
 function getData(){
     alert("已经调用！");
@@ -521,7 +541,7 @@ function getData(){
         success:function(data){
             for(var i=0;i<data.length;i++){
                 var cname = data[i].cname;
-                var code = data[i].cloudcode;
+                code = data[i].cloudcode;
                 cdata.push({name:cname,value:code})
             }
 
@@ -581,14 +601,15 @@ function draw_circle() {
         var imgsrc = $(this).attr("ccode");
         alert(imgsrc);
     });*/
+    //点击获取code并请求表格数据
     $(".getcode").on("click", function() {
-        $("#circle_data").html("<div id='cont_main' style='width: 300px; height: 200px; left: -20px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;'>" +
+        $("#circle_data").html("<div id='cont_main' style='width: 325px; height: 200px; left: -20px; -webkit-tap-highlight-color: transparent; user-select: none; position: relative;'>" +
             "<div style='position: relative; overflow: hidden; width: 300px; height: 200px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;'>" +
             "<canvas data-zr-dom-id='zr_0' width='600' height='400' style='position: absolute; left: 0px; top: 0px; width: 280px; height: 300px; user-select: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); padding: 0px; margin: 0px; border-width: 0px;'>" +
             "</canvas>" + "</div>" +
             "</div>")
         var code = $(this).children().attr("cloudcode");
-        console.log(code)
+        console.log(code);
         var data ="cloudcode="+code;
         $.ajax({
             type: "post",
@@ -597,6 +618,7 @@ function draw_circle() {
             dataType: "json",
             data:data,
             success: function (data) {
+                console.log(data);
                 /*var iden = Object.getOwnPropertyNames(data[0]);
                 console.log(iden)
                 for (var i = 0; i < data.length; i++) {

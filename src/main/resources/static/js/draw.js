@@ -1381,13 +1381,13 @@ function draw_pie() {
         },
 
 
-        backgroundColor: new echarts.graphic.RadialGradient(0, 0, 1, [{
+        /*backgroundColor: new echarts.graphic.RadialGradient(0, 0, 1, [{
             offset: 0,
-            color: '#111'
+            color: 'rgba(128, 128, 128, 0.1)'
         }, {
             offset: 1,
-            color: '#111'
-        }]),
+            color: 'rgba(128, 128, 128, 0.1)'
+        }]),*/
         tooltip: {
             trigger: 'item',
             formatter: "{a} <br/>{b}:({d}%)"

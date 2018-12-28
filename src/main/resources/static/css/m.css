@@ -14,19 +14,20 @@ body{
     font-family:Microsoft YaHei;
     text-align:center;
     font-weight:bold;
-    font-size: 15px;
+    font-size: 18px;
     color: white;
-    background-color:#104E8B;
-    margin-top:-20px;
+    /*background-color:#104E8B;*/
+    margin-top:-35px;
     height: 30px;
     padding-top: 5px;
-    padding-left: 15px
+    padding-bottom: 40px;
 }
 #sub_text{
     color:#fff;
 }
 .top-menu{
     color: white;
+    cursor:pointer;
 }
 #title{
     font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -85,9 +86,9 @@ td{
     position: relative;
     background-position:center;
 }
-a:hover{
+/*a:hover{
     height:300px;
-}
+}*/
 
 .circle1 {
     background-color: #EF7070;
